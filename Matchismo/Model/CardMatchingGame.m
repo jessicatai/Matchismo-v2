@@ -10,6 +10,7 @@
 
 @interface CardMatchingGame()
 @property (nonatomic, readwrite) NSInteger score;
+@property (nonatomic, readwrite) NSMutableString *description;
 @property (nonatomic, strong) NSMutableArray *cards; // of Card
 @end
 
@@ -43,35 +44,75 @@
     return (index < [self.cards count]) ? self.cards[index] : nil;
 }
 
-static const int MISMATCH_PENALTY = 2;
+- (void) printChosenCards: (NSUInteger) index
+{
+    _description = [NSMutableString string];
+    for (Card *otherCard in self.cards) {
+        if (otherCard.isChosen && !otherCard.isMatched) {
+            [_description appendString: otherCard.contents];
+        }
+    }
+}
+
+static const int MISMATCH_PENALTY = -2;
 static const int MATCH_BONUS = 4;
-static const int COST_TO_CHOOSE = 1;
+static const int COST_TO_CHOOSE = -1;
 
 - (void) chooseCardAtIndex:(NSUInteger)index
 {
     Card *card = [self cardAtIndex:index];
-    if (!card.isMatched){
+    _description = [NSMutableString string];
+    if (!card.isMatched) {
         if (card.isChosen) {
             // toggle currently chosen card to not chosen
             card.chosen = NO;
+            // describe all chosen cards
+            [self printChosenCards:index];
+            
         } else {
-            // match against other chosen card
+            // find other chosen cards
+            NSMutableArray *matchedCards = [[NSMutableArray alloc] init];
             for (Card *otherCard in self.cards) {
                 if (otherCard.isChosen && !otherCard.isMatched) {
-                    int matchScore = [card match:@[otherCard]];
-                    if (matchScore) {
-                        self.score += matchScore * MATCH_BONUS;
-                        otherCard.matched = YES;
-                        card.matched = YES;
-                    } else {
-                        self.score -= MISMATCH_PENALTY;
-                        otherCard.chosen = NO;
-                    }
-                    break; // can only choose 2 cards for now
+                    [matchedCards addObject:otherCard];
                 }
             }
-            self.score -= COST_TO_CHOOSE;
+            // when the correct number of cards to check have been selected, perform the matching
+            // segment control index 0 = match 1 other card, index 1 = match 2 other cards
+            if ([matchedCards count] == self.numMatchedCards + 1) {
+                int matchScore = [card match:matchedCards];
+                // for any matched 2, take all 3 cards out of the game
+                int points;
+                if (matchScore) {
+                    [_description appendString: @"Matched "];
+                    points = matchScore * MATCH_BONUS;
+                    
+                } else {
+                    [_description appendString:@"Penalty! Mismatched "];
+                    points = MISMATCH_PENALTY;
+                }
+                
+                [_description appendString: card.contents];
+                
+                // set card status and message for each matched card
+                for (Card *otherCard in matchedCards) {
+                    otherCard.matched = matchScore ? YES : NO;
+                    otherCard.chosen = matchScore ? YES : NO;
+                    [_description appendString:otherCard.contents];
+                }
+                [_description appendString: [NSString stringWithFormat:@" for %d points.", points]];
+                
+                self.score += points;
+                card.matched = matchScore ? YES : NO;
+
+            } else {
+                [self printChosenCards:index];
+                Card *card = [self cardAtIndex:index];
+                [_description appendString:card.contents];
+            }
+            
             card.chosen = YES;
+            self.score += COST_TO_CHOOSE;
         }
     }
 }
