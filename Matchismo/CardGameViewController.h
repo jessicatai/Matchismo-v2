@@ -7,7 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CardMatchingGame.h"
+
 
 @interface CardGameViewController : UIViewController
+@property (strong, nonatomic) Deck *deck;   //abstract
+@property (strong, nonatomic) CardMatchingGame *game;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
+@property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *cardsLabel;
+@property (strong, nonatomic) IBOutlet UIButton *restartButton;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *difficultyControl;
+
+- (NSAttributedString *)titleForCard:(Card *) card; // abstract
+- (UIImage *)backgroundImageForCard:(Card *)card; // abstract
 
 @end

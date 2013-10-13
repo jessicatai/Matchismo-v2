@@ -18,7 +18,8 @@
 - (Card *) cardAtIndex:(NSUInteger)index;
 
 @property (nonatomic, readonly) NSInteger score;
-@property (nonatomic, readonly) NSMutableString *description;
+@property (nonatomic, readonly) NSString *description;
+@property (nonatomic, strong) NSMutableArray *chosenCards;
 
 // value indicates how many cards to match
 @property (nonatomic, getter=getNumMatchedCards, setter=setNumMatchedCards:) NSInteger numMatchedCards;
