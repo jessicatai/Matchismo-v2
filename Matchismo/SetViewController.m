@@ -15,13 +15,22 @@
 @end
 
 @implementation SetViewController
+
+@synthesize game = _game;
+
+- (CardMatchingGame *)game
+{
+    if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[self createDeck]];
+    // set is always played with 3 cards
+    _game.numCardsInMatch = 3;
+    return _game;
+}
+
 - (Deck *)createDeck
 {
     NSLog(@"set - in deck");
     return [[SetCardDeck alloc] init];
 }
-
-
 
 - (NSAttributedString *)titleForCard:(SetCard *) card
 {
@@ -38,7 +47,7 @@
 }
 
 - (UIImage *)backgroundImageForCard:(Card *)card {
-    return [UIImage imageNamed: card.isChosen? @"cardgrey" : @"cardfront"];
+    return [UIImage imageNamed: card.isChosen && !card.isMatched? @"cardoutline" : @"cardfront"];
 }
 
 
@@ -50,7 +59,7 @@
 
 - (UIColor *) getShadingColor:(UIColor *) color withShading:(NSString *)shading{
     NSDictionary *colors = @{ @"solid" : @1,
-                              @"striped" : @0.4,
+                              @"striped" : @0.25,
                               @"blank" : @0};
     return [color colorWithAlphaComponent:[colors[shading] floatValue]];
 }

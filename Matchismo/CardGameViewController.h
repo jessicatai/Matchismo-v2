@@ -12,7 +12,7 @@
 
 @interface CardGameViewController : UIViewController
 @property (strong, nonatomic) Deck *deck;   //abstract
-@property (strong, nonatomic) CardMatchingGame *game;
+@property (strong, nonatomic) CardMatchingGame *game; //abstract
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;

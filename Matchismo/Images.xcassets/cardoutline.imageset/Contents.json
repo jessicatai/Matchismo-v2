@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "grey-card-rounded-corner.png"
+      "filename" : "outlined-card-rounded-corner.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "grey-card-hi-rest.png"
+      "filename" : "outlined-card-hi-res.png"
     }
   ],
   "info" : {

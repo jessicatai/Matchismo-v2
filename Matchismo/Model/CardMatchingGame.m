@@ -12,6 +12,7 @@
 @property (nonatomic, readwrite) NSInteger score;
 @property (nonatomic, readwrite) NSString *description;
 @property (nonatomic, strong) NSMutableArray *cards; // of Card
+
 @end
 
 @implementation CardMatchingGame
@@ -53,9 +54,8 @@
 }
 
 static const int MISMATCH_PENALTY = -2;
-static const int MATCH_BONUS = 4;
 static const int COST_TO_CHOOSE = -1;
-
+static const int MATCH_BONUS = 4;
 - (void) chooseCardAtIndex:(NSUInteger)index
 {
     Card *card = [self cardAtIndex:index];
@@ -68,19 +68,18 @@ static const int COST_TO_CHOOSE = -1;
             self.description = @"";
             
         } else {
-            // segment control index 0 = match 1 other card, index 1 = match 2 other cards
-            int numCardsToMatch = 2;//self.numMatchedCards + 1;
-            
-            
+            // get chosen cards (excluding current card)
             [self updateChosenCards];
 
-            // when the correct number of cards to check have been selected, perform the matching
-            if ([self.chosenCards count] == numCardsToMatch) {
+            // when the correct number of other cards to check have been chosen, perform the matching
+            if ([self.chosenCards count] == self.numCardsInMatch - 1) {
                 int matchScore = [card match:self.chosenCards];
                 // for any matched 2, take all 3 cards out of the game
                 int points;
                 if (matchScore) {
-                    points = matchScore * MATCH_BONUS;
+                    // will give user a net gain of 4 points to find the match
+                    points = matchScore * MATCH_BONUS + (self.numCardsInMatch * -1 * COST_TO_CHOOSE);
+;
                 } else {
                     points = MISMATCH_PENALTY;
                 }

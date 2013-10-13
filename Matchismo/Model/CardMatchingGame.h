@@ -22,6 +22,6 @@
 @property (nonatomic, strong) NSMutableArray *chosenCards;
 
 // value indicates how many cards to match
-@property (nonatomic, getter=getNumMatchedCards, setter=setNumMatchedCards:) NSInteger numMatchedCards;
+@property (nonatomic) NSUInteger numCardsInMatch;
 
 @end

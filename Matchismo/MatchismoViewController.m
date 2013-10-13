@@ -17,36 +17,31 @@
 
 @implementation MatchismoViewController
 
+@synthesize game = _game;
+
+- (CardMatchingGame *)game
+{
+    if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[self createDeck]];
+    // index 0 = match 2 cards, index 1 = match 3 cards
+    _game.numCardsInMatch = self.difficultyControl.selectedSegmentIndex + 2;
+    return _game;
+}
+
+
 - (Deck *)createDeck
 {
     NSLog(@"matchismo create deck");
     return [[PlayingCardDeck alloc] init];
 }
 
-//- (void)updateUI
+//- (IBAction)touchRestartButton:(UIButton *)sender
 //{
-//    NSLog(@"matchismo update UI");
-//    for (UIButton *cardButton in self.cardButtons) {
-//        int cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
-//        Card *card = [self.game cardAtIndex:cardButtonIndex];
-//        [cardButton setAttributedTitle:[self titleForCard:card] forState:UIControlStateNormal];
-//        [cardButton setBackgroundImage:[self backgroundImageForCard:card] forState:UIControlStateNormal];
-//        cardButton.enabled = !card.isMatched;
-//        self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
-//
-//        self.descriptionLabel.attributedText = cardButton.titleLabel.attributedText;
-//    }
-//
+//    [self.game setNumMatchedCards:self.difficultyControl.selectedSegmentIndex];
 //}
-- (IBAction)touchRestartButton:(UIButton *)sender
-{
-
-    [self.game setNumMatchedCards:self.difficultyControl.selectedSegmentIndex];
-}
 
 
 - (IBAction)touchDifficultyControl:(UISegmentedControl *)sender {
-    [self.game setNumMatchedCards:self.difficultyControl.selectedSegmentIndex];
+    [self.game setNumCardsInMatch:self.difficultyControl.selectedSegmentIndex];
 }
 
 - (NSAttributedString *)titleForCard:(Card *) card

@@ -14,10 +14,22 @@
 @end
 
 @implementation CardGameViewController
+- (void) viewDidLoad
+{
+    [super viewDidLoad];
+    // initialize game without waiting for user input
+    [self updateUI];
+}
+
 - (CardMatchingGame *)game
 {
-    if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[self createDeck]];
-    return _game;
+    return nil;
+}
+
+// abstract method
+-(CardMatchingGame *) createGame
+{
+    return nil;
 }
 
 // abstract method
@@ -45,7 +57,7 @@
 - (IBAction)touchRestartButton:(UIButton *)sender
 {
     // reset game deck
-    _game = nil;
+    self.game = nil;
     
     // reset the score label to 0
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
