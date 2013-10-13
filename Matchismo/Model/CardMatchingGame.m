@@ -29,6 +29,11 @@
     return _cards;
 }
 
+- (NSMutableArray *) historyEntries {
+    if (!_historyEntries) _historyEntries = [[NSMutableArray alloc] init];
+    return _historyEntries;
+}
+
 - (instancetype)initWithCardCount:(NSUInteger)count usingDeck:(Deck *)deck
 {
     self = [super init];
@@ -47,9 +52,17 @@
     return self;
 }
 
+
 - (Card *) cardAtIndex:(NSUInteger)index
 {
     return (index < [self.cards count]) ? self.cards[index] : nil;
+}
+
+-(void) addEntryWithCard:(NSMutableArray *) cards withPoints:(int) points
+{
+    CardGameHistoryEntry *entry = [[CardGameHistoryEntry alloc] initWithCards:cards usingPoints:points];
+    [self.historyEntries addObject:entry];
+    NSLog(@"adding new entry in cardgame, count %d", [self.historyEntries count]);
 }
 
 static const int MISMATCH_PENALTY = -2;
@@ -93,14 +106,16 @@ static const int MATCH_BONUS = 4;
                 // update the description to reflect the result choosing the card
                 self.description = [self setDescriptionTextForPoints:points];
                 
+                
             } else {
                 self.description = @"";
             }
             // for each card button touched, there is a cost
             self.score += COST_TO_CHOOSE;
-            
-            card.chosen = YES;
+                 
             [self.chosenCards addObject:card];
+            card.chosen = YES;
+            
         }
     }
 }

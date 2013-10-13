@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Deck.h"
 #import "Card.h"
+#import "CardGameHistoryEntry.h"
 
 @interface CardMatchingGame : NSObject
 
@@ -20,6 +21,7 @@
 @property (nonatomic, readonly) NSInteger score;
 @property (nonatomic, readonly) NSString *description;
 @property (nonatomic, strong) NSMutableArray *chosenCards;
+@property (nonatomic, strong) NSMutableArray *historyEntries; // of CardGameHistoryEntry
 
 // value indicates how many cards to match
 @property (nonatomic) NSUInteger numCardsInMatch;

@@ -8,12 +8,24 @@
 //
 
 #import "CardGameViewController.h"
+#import "HistoryViewController.h"
 
 @interface CardGameViewController ()
 @property (nonatomic, strong) NSMutableAttributedString *attributedDescription;
 @end
 
 @implementation CardGameViewController
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"Print History"]) {
+        if ([segue.destinationViewController isKindOfClass:[HistoryViewController class]]) {
+            HistoryViewController *hvc = (HistoryViewController *)segue.destinationViewController;
+            hvc.historyEntries = self.game.historyEntries;
+        }
+    }
+}
+
 - (void) viewDidLoad
 {
     [super viewDidLoad];
@@ -46,9 +58,7 @@
 
 - (IBAction)touchCardButton:(UIButton *)sender
 {
-    //NSLog(@"in abstract touch card button");
     int chosenButtonIndex = [self.cardButtons indexOfObject:sender];
-    //NSLog(@"chosen button index: %d", chosenButtonIndex);
     [self.game chooseCardAtIndex:chosenButtonIndex];
     [self updateUI];
     self.difficultyControl.enabled = NO;
@@ -87,12 +97,24 @@
             [cardsText appendAttributedString:[[NSAttributedString  alloc] initWithString: @"\t"]];
         }
         
-        
         cardButton.enabled = !card.isMatched;
         self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
     }
+    
+    // TODO: print out chosen cards thus far
+    
     self.cardsLabel.attributedText = cardsText;
-    self.descriptionLabel.attributedText = [[NSAttributedString alloc] initWithString: self.game.description ? self.game.description: @""];
+    NSString *description = self.game.description ? self.game.description: @"";
+    self.descriptionLabel.attributedText = [[NSAttributedString alloc] initWithString: description];
+    
+    // add new match/mismatch items to history
+    if (![description isEqualToString:@""]){
+        NSMutableAttributedString *entryText = [[NSMutableAttributedString alloc] initWithAttributedString:cardsText];
+        [entryText appendAttributedString: [[NSAttributedString alloc] initWithString: description]];
+        [self.game.historyEntries addObject:entryText];
+        NSLog(@"entry text: %@", [entryText string]);
+        NSLog(@"from vc, historyEntries count : %d", [self.game.historyEntries count]);
+    }
 }
 
 // abstract
