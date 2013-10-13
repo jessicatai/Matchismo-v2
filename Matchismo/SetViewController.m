@@ -46,6 +46,12 @@
     return attrString;
 }
 
+// title is always showing return same value as title for card
+- (NSAttributedString *)getTextForCard:(Card *) card
+{
+    return [self titleForCard:card];
+}
+
 - (UIImage *)backgroundImageForCard:(Card *)card {
     return [UIImage imageNamed: card.isChosen && !card.isMatched? @"cardoutline" : @"cardfront"];
 }

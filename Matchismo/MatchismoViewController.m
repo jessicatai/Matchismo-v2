@@ -30,15 +30,8 @@
 
 - (Deck *)createDeck
 {
-    NSLog(@"matchismo create deck");
     return [[PlayingCardDeck alloc] init];
 }
-
-//- (IBAction)touchRestartButton:(UIButton *)sender
-//{
-//    [self.game setNumMatchedCards:self.difficultyControl.selectedSegmentIndex];
-//}
-
 
 - (IBAction)touchDifficultyControl:(UISegmentedControl *)sender {
     [self.game setNumCardsInMatch:self.difficultyControl.selectedSegmentIndex];
@@ -47,6 +40,11 @@
 - (NSAttributedString *)titleForCard:(Card *) card
 {
     return [[NSAttributedString alloc] initWithString:(card.isChosen ? card.contents : @"") attributes:@{}];
+}
+
+- (NSAttributedString *)getTextForCard:(Card *) card
+{
+    return [[NSAttributedString alloc] initWithString:(card.contents) attributes:@{}];
 }
 
 - (UIImage *)backgroundImageForCard:(Card *)card

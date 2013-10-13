@@ -15,7 +15,6 @@
     self = [super init];
     if (self) {
         for (NSString *shape in [SetCard validShapes]) {
-            NSLog(@"Created set deck with cards w %@!", shape);
             for (NSString *color in [SetCard validColor]) {
                 for (NSString *shading in [SetCard validShading]) {
                     for (NSUInteger count = 1; count <= [SetCard maxCount]; count++) {

@@ -31,7 +31,6 @@
 
 - (instancetype)initWithCardCount:(NSUInteger)count usingDeck:(Deck *)deck
 {
-    NSLog(@"init with card count %d card matching game", count);
     self = [super init];
     if (self) {
         for (int i = 0; i < count; i++) {
@@ -59,7 +58,6 @@ static const int MATCH_BONUS = 4;
 - (void) chooseCardAtIndex:(NSUInteger)index
 {
     Card *card = [self cardAtIndex:index];
-    NSLog(@"size of chosen cards: %d", [self.chosenCards count]);
     if (!card.isMatched) {
         // toggle a currently chosen card to not chosen
         if (card.isChosen) {
@@ -103,8 +101,6 @@ static const int MATCH_BONUS = 4;
             
             card.chosen = YES;
             [self.chosenCards addObject:card];
-            
-            NSLog(@"updated size of chosen cards: %d", [self.chosenCards count]);
         }
     }
 }
@@ -115,7 +111,6 @@ static const int MATCH_BONUS = 4;
 
 - (void) updateChosenCards {
     [self.chosenCards removeAllObjects];
-    NSLog(@"empty size chosen cards: %d", [self.chosenCards count]);
     for (Card * card in self.cards){
         if (card.isChosen && !card.isMatched)
             [self.chosenCards addObject:card];
