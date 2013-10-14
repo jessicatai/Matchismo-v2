@@ -26,9 +26,8 @@
 
 - (void) updateUI
 {
-    NSLog(@" self.history entries size %d", [self.historyEntries count]);
     NSMutableAttributedString *newHistoryText = [[NSMutableAttributedString alloc] initWithAttributedString:self.historyTextView.attributedText];
-    
+    // print each attributed string of (mis)match descriptions to the UI text field
     for (NSMutableAttributedString *entry in self.historyEntries) {
         [newHistoryText appendAttributedString:entry];
         [newHistoryText appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"\n"]];

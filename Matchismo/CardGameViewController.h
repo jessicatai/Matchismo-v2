@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *cardsLabel;
 @property (strong, nonatomic) IBOutlet UIButton *restartButton;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *difficultyControl;
+@property (nonatomic) NSUInteger difficulty;
 
 - (NSAttributedString *)titleForCard:(Card *) card; // abstract
 - (UIImage *)backgroundImageForCard:(Card *)card; // abstract

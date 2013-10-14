@@ -25,7 +25,6 @@
 {
     CardGameHistoryEntry *entry = [[CardGameHistoryEntry alloc] initWithCards:cards usingPoints:points];
     [self.entries addObject:entry];
-    NSLog(@"adding new entry, count %d", [self.entries count]);
 }
 
 @end

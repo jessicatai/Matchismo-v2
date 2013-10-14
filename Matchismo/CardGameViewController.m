@@ -61,7 +61,6 @@
     int chosenButtonIndex = [self.cardButtons indexOfObject:sender];
     [self.game chooseCardAtIndex:chosenButtonIndex];
     [self updateUI];
-    self.difficultyControl.enabled = NO;
 }
 
 - (IBAction)touchRestartButton:(UIButton *)sender
@@ -74,9 +73,6 @@
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
     
     [self updateUI];
-    
-    // display the difficulty control
-    self.difficultyControl.enabled = YES;
 }
 
 
@@ -112,8 +108,6 @@
         NSMutableAttributedString *entryText = [[NSMutableAttributedString alloc] initWithAttributedString:cardsText];
         [entryText appendAttributedString: [[NSAttributedString alloc] initWithString: description]];
         [self.game.historyEntries addObject:entryText];
-        NSLog(@"entry text: %@", [entryText string]);
-        NSLog(@"from vc, historyEntries count : %d", [self.game.historyEntries count]);
     }
 }
 

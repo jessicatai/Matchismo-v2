@@ -23,7 +23,7 @@
 {
     if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[self createDeck]];
     // index 0 = match 2 cards, index 1 = match 3 cards
-    _game.numCardsInMatch = self.difficultyControl.selectedSegmentIndex + 2;
+    _game.numCardsInMatch = [_game getPointsForKey:@"difficulty" withDefaultValue:0] + 2;
     return _game;
 }
 
@@ -31,10 +31,6 @@
 - (Deck *)createDeck
 {
     return [[PlayingCardDeck alloc] init];
-}
-
-- (IBAction)touchDifficultyControl:(UISegmentedControl *)sender {
-    [self.game setNumCardsInMatch:self.difficultyControl.selectedSegmentIndex];
 }
 
 - (NSAttributedString *)titleForCard:(Card *) card

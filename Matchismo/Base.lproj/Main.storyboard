@@ -1011,10 +1011,10 @@
             </objects>
             <point key="canvasLocation" x="1360" y="483"/>
         </scene>
-        <!--View Controller - Settings-->
+        <!--Card Game Settings View Controller - Settings-->
         <scene sceneID="P2B-5Z-gnd">
             <objects>
-                <viewController id="xEf-wJ-I5d" sceneMemberID="viewController">
+                <viewController id="xEf-wJ-I5d" customClass="CardGameSettingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="I3O-Z6-fDQ"/>
                         <viewControllerLayoutGuide type="bottom" id="42q-Iu-V8w"/>
@@ -1024,7 +1024,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <segmentedControl contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7Sp-am-cNd">
-                                <rect key="frame" x="28" y="57" width="123" height="29"/>
+                                <rect key="frame" x="161" y="20" width="127" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <segments>
@@ -1033,13 +1033,93 @@
                                 </segments>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
+                                    <action selector="touchDifficultyControl:" destination="xEf-wJ-I5d" eventType="valueChanged" id="38i-8A-4Eo"/>
                                     <action selector="touchDifficultyControl:" destination="vXZ-lx-hvc" eventType="valueChanged" id="fms-ne-Efc"/>
+                                </connections>
+                            </segmentedControl>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Matchismo Difficulty" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E0B-Sn-2NV">
+                                <rect key="frame" x="20" y="23" width="133" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Match Bonus" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B30-QU-PAL">
+                                <rect key="frame" x="20" y="65" width="92" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="4" maximumValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="FGM-Hj-G6C">
+                                <rect key="frame" x="190" y="61" width="94" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="bonusValueChanged:" destination="xEf-wJ-I5d" eventType="valueChanged" id="i4w-nR-DGP"/>
+                                </connections>
+                            </stepper>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="4" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZG8-V3-2o7">
+                                <rect key="frame" x="140" y="61" width="42" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mismatch Penalty" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PVz-9C-H8q">
+                                <rect key="frame" x="20" y="105" width="115" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="-2" minimumValue="-20" translatesAutoresizingMaskIntoConstraints="NO" id="cTq-3L-HcF">
+                                <rect key="frame" x="190" y="101" width="94" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="penaltyValueChanged:" destination="xEf-wJ-I5d" eventType="valueChanged" id="dJo-qH-Tk7"/>
+                                </connections>
+                            </stepper>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="-2" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uf9-wk-ENi">
+                                <rect key="frame" x="140" y="101" width="42" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cost to Choose a Card" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DSZ-BD-jf3">
+                                <rect key="frame" x="20" y="143" width="149" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="55p-7v-uNt">
+                                <rect key="frame" x="190" y="140" width="94" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <segments>
+                                    <segment title="On"/>
+                                    <segment title="Off"/>
+                                </segments>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="touchCostToChooseControl:" destination="xEf-wJ-I5d" eventType="valueChanged" id="BQN-kb-nqa"/>
+                                    <action selector="touchDifficultyControl:" destination="xEf-wJ-I5d" eventType="valueChanged" id="XCI-Xp-GNK"/>
+                                    <action selector="touchDifficultyControl:" destination="vXZ-lx-hvc" eventType="valueChanged" id="ziM-K2-jCp"/>
                                 </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" id="kqE-W2-CGs"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="gear_icon" id="kqE-W2-CGs"/>
+                    <connections>
+                        <outlet property="costToChooseControl" destination="55p-7v-uNt" id="wHu-nM-KYu"/>
+                        <outlet property="matchBonusStepper" destination="FGM-Hj-G6C" id="HUY-U7-TVu"/>
+                        <outlet property="matchBonusTextField" destination="ZG8-V3-2o7" id="7Vj-Rt-ih6"/>
+                        <outlet property="matchismoDifficultyControl" destination="7Sp-am-cNd" id="vF9-3L-Xys"/>
+                        <outlet property="mismatchPenaltyStepper" destination="cTq-3L-HcF" id="7cC-uT-ItV"/>
+                        <outlet property="mismatchPenaltyTextField" destination="uf9-wk-ENi" id="YoW-EW-96f"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="305-tp-2qP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1048,67 +1128,8 @@
     </scenes>
     <resources>
         <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
         <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
+        <image name="gear_icon" width="30" height="30"/>
         <image name="matchismo_icon" width="30" height="30"/>
         <image name="set_icon" width="30" height="30"/>
     </resources>

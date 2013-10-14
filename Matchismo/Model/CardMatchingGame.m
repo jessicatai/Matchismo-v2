@@ -62,12 +62,12 @@
 {
     CardGameHistoryEntry *entry = [[CardGameHistoryEntry alloc] initWithCards:cards usingPoints:points];
     [self.historyEntries addObject:entry];
-    NSLog(@"adding new entry in cardgame, count %d", [self.historyEntries count]);
 }
 
 static const int MISMATCH_PENALTY = -2;
 static const int COST_TO_CHOOSE = -1;
 static const int MATCH_BONUS = 4;
+
 - (void) chooseCardAtIndex:(NSUInteger)index
 {
     Card *card = [self cardAtIndex:index];
@@ -89,10 +89,10 @@ static const int MATCH_BONUS = 4;
                 int points;
                 if (matchScore) {
                     // will give user a net gain of 4 points to find the match
-                    points = matchScore * MATCH_BONUS + (self.numCardsInMatch * -1 * COST_TO_CHOOSE);
-;
+                    points = matchScore * [self getPointsForKey:@"matchBonus" withDefaultValue:MATCH_BONUS] + (self.numCardsInMatch * -1 * [self getPointsForKey:@"costToChoose" withDefaultValue:COST_TO_CHOOSE]);
+
                 } else {
-                    points = MISMATCH_PENALTY;
+                    points = [self getPointsForKey:@"mismatchPenalty" withDefaultValue:MISMATCH_PENALTY];
                 }
                 self.score += points;
                 
@@ -110,8 +110,8 @@ static const int MATCH_BONUS = 4;
             } else {
                 self.description = @"";
             }
-            // for each card button touched, there is a cost
-            self.score += COST_TO_CHOOSE;
+            // for each card button touched, there is a cost (can be overridden in settings)
+            self.score += [self getPointsForKey:@"costToChoose" withDefaultValue:COST_TO_CHOOSE];
                  
             [self.chosenCards addObject:card];
             card.chosen = YES;
@@ -120,7 +120,13 @@ static const int MATCH_BONUS = 4;
     }
 }
 
-- (NSString *) setDescriptionTextForPoints:(int) points{
+// retrieve NSUserDefaults potentially changed in the settings
+- (int) getPointsForKey:(NSString *)key withDefaultValue:(int) val {
+    NSString *str =[[NSUserDefaults standardUserDefaults] objectForKey:key];
+    return str ? [str intValue] : val;
+}
+
+- (NSString *) setDescriptionTextForPoints:(int) points {
     return[NSString stringWithFormat:@"%1$@ for %2$d points.", points > 0 ? @"Match" : @"Penalty, mismatched",points];
 }
 

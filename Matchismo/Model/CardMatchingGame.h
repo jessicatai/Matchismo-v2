@@ -17,6 +17,7 @@
 -(instancetype) initWithCardCount:(NSUInteger)count usingDeck: (Deck *) deck;
 - (void) chooseCardAtIndex:(NSUInteger)index;
 - (Card *) cardAtIndex:(NSUInteger)index;
+- (int) getPointsForKey:(NSString *)key withDefaultValue:(int) val;
 
 @property (nonatomic, readonly) NSInteger score;
 @property (nonatomic, readonly) NSString *description;

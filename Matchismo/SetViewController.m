@@ -28,7 +28,6 @@
 
 - (Deck *)createDeck
 {
-    NSLog(@"set - in deck");
     return [[SetCardDeck alloc] init];
 }
 
