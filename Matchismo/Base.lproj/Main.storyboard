@@ -1128,66 +1128,6 @@
     </scenes>
     <resources>
         <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
         <image name="cardfront" width="64" height="96"/>
         <image name="gear_icon" width="30" height="30"/>
         <image name="matchismo_icon" width="30" height="30"/>

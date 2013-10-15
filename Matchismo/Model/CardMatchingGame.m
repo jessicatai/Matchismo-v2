@@ -10,7 +10,6 @@
 
 @interface CardMatchingGame()
 @property (nonatomic, readwrite) NSInteger score;
-@property (nonatomic, readwrite) NSString *description;
 @property (nonatomic, strong) NSMutableArray *cards; // of Card
 
 @end
@@ -76,7 +75,7 @@ static const int MATCH_BONUS = 4;
         if (card.isChosen) {
             card.chosen = NO;
             [self updateChosenCards];
-            self.description = @"";
+            self.points = NSNotFound;
             
         } else {
             // get chosen cards (excluding current card)
@@ -103,12 +102,12 @@ static const int MATCH_BONUS = 4;
                 }
                 card.matched = matchScore ? YES : NO;
                 
-                // update the description to reflect the result choosing the card
-                self.description = [self setDescriptionTextForPoints:points];
+                // update to reflext the most recently awarded/decremented points
+                self.points = points;
                 
                 
             } else {
-                self.description = @"";
+                self.points = NSNotFound;
             }
             // for each card button touched, there is a cost (can be overridden in settings)
             self.score += [self getPointsForKey:@"costToChoose" withDefaultValue:COST_TO_CHOOSE];
@@ -126,9 +125,6 @@ static const int MATCH_BONUS = 4;
     return str ? [str intValue] : val;
 }
 
-- (NSString *) setDescriptionTextForPoints:(int) points {
-    return[NSString stringWithFormat:@"%1$@ for %2$d points.", points > 0 ? @"Match" : @"Penalty, mismatched",points];
-}
 
 - (void) updateChosenCards {
     [self.chosenCards removeAllObjects];

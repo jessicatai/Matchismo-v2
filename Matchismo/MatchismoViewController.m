@@ -21,9 +21,11 @@
 
 - (CardMatchingGame *)game
 {
-    if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[self createDeck]];
-    // index 0 = match 2 cards, index 1 = match 3 cards
-    _game.numCardsInMatch = [_game getPointsForKey:@"difficulty" withDefaultValue:0] + 2;
+    if (!_game) {
+        _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[self createDeck]];
+        _game.points = NSNotFound;
+    }
+
     return _game;
 }
 

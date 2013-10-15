@@ -20,7 +20,11 @@
 
 - (CardMatchingGame *)game
 {
-    if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[self createDeck]];
+    if (!_game)
+    {
+        _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[self createDeck]];
+        _game.points = NSNotFound;
+    }
     // set is always played with 3 cards
     _game.numCardsInMatch = 3;
     return _game;

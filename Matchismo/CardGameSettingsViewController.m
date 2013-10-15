@@ -12,6 +12,8 @@
 
 @end
 
+// Current implementation of settings gives users a lot of freedom to change the scoring and # of cards in a match during
+// the middle of the game
 @implementation
 CardGameSettingsViewController
 

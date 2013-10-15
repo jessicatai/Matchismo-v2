@@ -20,9 +20,9 @@
 - (int) getPointsForKey:(NSString *)key withDefaultValue:(int) val;
 
 @property (nonatomic, readonly) NSInteger score;
-@property (nonatomic, readonly) NSString *description;
 @property (nonatomic, strong) NSMutableArray *chosenCards;
 @property (nonatomic, strong) NSMutableArray *historyEntries; // of CardGameHistoryEntry
+@property (nonatomic, readwrite) NSInteger points;
 
 // value indicates how many cards to match
 @property (nonatomic) NSUInteger numCardsInMatch;

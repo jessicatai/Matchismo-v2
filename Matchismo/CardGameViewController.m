@@ -58,6 +58,10 @@
 
 - (IBAction)touchCardButton:(UIButton *)sender
 {
+    // Users may switch difficulty in the middle of the game
+    // index 0 = match 2 cards, index 1 = match 3 cards
+    self.game.numCardsInMatch = [self.game getPointsForKey:@"difficulty" withDefaultValue:0] + 2;
+    
     int chosenButtonIndex = [self.cardButtons indexOfObject:sender];
     [self.game chooseCardAtIndex:chosenButtonIndex];
     [self updateUI];
@@ -100,7 +104,7 @@
     // TODO: print out chosen cards thus far
     
     self.cardsLabel.attributedText = cardsText;
-    NSString *description = self.game.description ? self.game.description: @"";
+    NSString *description = [self setDescriptionTextForPoints:self.game.points];
     self.descriptionLabel.attributedText = [[NSAttributedString alloc] initWithString: description];
     
     // add new match/mismatch items to history
@@ -109,6 +113,11 @@
         [entryText appendAttributedString: [[NSAttributedString alloc] initWithString: description]];
         [self.game.historyEntries addObject:entryText];
     }
+}
+
+// NSNotFound implies not a (mis)match action
+- (NSString *) setDescriptionTextForPoints:(int) points {
+    return points == NSNotFound ? @"" : [NSString stringWithFormat:@"%1$@ for %2$d points.", points > 0 ? @"Match" : @"Penalty, mismatched",points];
 }
 
 // abstract
