@@ -17,17 +17,17 @@ CardGameSettingsViewController
 
 // load any previous settings
 - (void) viewDidLoad {
-    // default index 0 = 2 card matchismo, -2 to compensate for st
     [self.matchismoDifficultyControl setSelectedSegmentIndex: [self loadPreviousSettingsWithKey:@"difficulty" usingDefaultValue:0]];
     
-    // default index 0 = yes, cost to choose as -1 point
+    // default index 0 = yes cost to choose value as -1 point
+    // index 1 = no cost value as 0 point
     [self.costToChooseControl setSelectedSegmentIndex: [self loadPreviousSettingsWithKey:@"costToChoose" usingDefaultValue:0] + 1];
 
     // set both the stepper and the text fields to the correct previous settings
     self.matchBonusStepper.value = [self loadPreviousSettingsWithKey:@"matchBonus" usingDefaultValue:4];
     self.matchBonusTextField.text = [NSString stringWithFormat:@"%d", [self loadPreviousSettingsWithKey:@"matchBonus" usingDefaultValue:4]];
     
-    self.mismatchPenaltyStepper.value = [self loadPreviousSettingsWithKey:@"matchBonus" usingDefaultValue:-2];
+    self.mismatchPenaltyStepper.value = [self loadPreviousSettingsWithKey:@"mismatchPenalty" usingDefaultValue:-2];
     self.mismatchPenaltyTextField.text = [NSString stringWithFormat:@"%d", [self loadPreviousSettingsWithKey:@"mismatchPenalty" usingDefaultValue:-2]];
     
 }
