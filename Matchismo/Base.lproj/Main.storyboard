@@ -986,7 +986,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pNj-8z-ATD">
-                                <rect key="frame" x="0.0" y="61" width="320" height="335"/>
+                                <rect key="frame" x="0.0" y="60" width="320" height="336"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <gestureRecognizers/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cKN-1v-Dxr">
@@ -1212,21 +1212,70 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IiD-2S-ft9" customClass="SetCardView">
-                                <rect key="frame" x="74" y="104" width="120" height="80"/>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7x4-mN-JRv">
+                                <rect key="frame" x="0.0" y="65" width="320" height="326"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NwH-92-DY8">
+                                    <size key="itemSize" width="40" height="60"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SetCard" id="5te-VZ-QqL" customClass="SetCardCollectionViewCell">
+                                        <rect key="frame" x="0.0" y="64" width="40" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="quL-bZ-ZOW" customClass="SetCardView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <outlet property="setCardView" destination="quL-bZ-ZOW" id="ZAp-PS-8ND"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Lxe-yL-cHa" appends="YES" id="aJV-Mp-liu"/>
+                                    <outlet property="dataSource" destination="NIE-oc-PFb" id="1Hr-Sb-4hd"/>
+                                    <outlet property="delegate" destination="NIE-oc-PFb" id="t7r-dU-srx"/>
+                                    <outletCollection property="gestureRecognizers" destination="Hyl-oU-Nuj" appends="YES" id="fOA-wV-R0K"/>
                                 </connections>
-                            </view>
+                            </collectionView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l7b-5g-Wsw">
+                                <rect key="frame" x="20" y="399" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NYy-SC-k1s">
+                                <rect key="frame" x="228" y="396" width="72" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="+3 cards" backgroundImage="cardfront">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="touchAddCardsButton:" destination="NIE-oc-PFb" eventType="touchUpInside" id="0Rf-9d-S2x"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="HWj-iX-eKG"/>
                     <connections>
-                        <outlet property="setCardView" destination="IiD-2S-ft9" id="0oI-VK-GE7"/>
+                        <outlet property="addCardsButton" destination="NYy-SC-k1s" id="XEW-Ex-pRT"/>
+                        <outlet property="cardCollectionView" destination="7x4-mN-JRv" id="xbl-kI-QI0"/>
+                        <outlet property="scoreLabel" destination="l7b-5g-Wsw" id="hcW-Wv-oae"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cgi-tA-mGr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1235,6 +1284,11 @@
                         <action selector="swipe:" destination="NIE-oc-PFb" id="Aq0-Nl-Sey"/>
                     </connections>
                 </swipeGestureRecognizer>
+                <tapGestureRecognizer id="Hyl-oU-Nuj">
+                    <connections>
+                        <action selector="touchCard:" destination="NIE-oc-PFb" id="EfP-ah-gEr"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1875" y="483"/>
         </scene>
@@ -1270,6 +1324,7 @@
         <image name="cardback" width="80" height="120"/>
         <image name="cardback" width="80" height="120"/>
         <image name="cardback" width="80" height="120"/>
+        <image name="cardfront" width="64" height="96"/>
         <image name="cardfront" width="64" height="96"/>
         <image name="cardfront" width="64" height="96"/>
         <image name="cardfront" width="64" height="96"/>

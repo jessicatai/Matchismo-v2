@@ -17,7 +17,7 @@
 @implementation CardGameViewController
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.startingCardCount;
+    return self.game.currentCardCount;
 
 }
 
@@ -60,6 +60,7 @@
     return _attributedDescription;
 }
 - (IBAction)touchCard:(UITapGestureRecognizer *)sender {
+    NSLog(@"tap gesture recognized");
     CGPoint tapLocation = [sender locationInView:self.cardCollectionView];
     NSIndexPath *indexPath = [self.cardCollectionView indexPathForItemAtPoint:tapLocation];
     
@@ -91,7 +92,6 @@
     
     [self updateUI];
 }
-
 
 
 - (void)updateUI

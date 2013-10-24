@@ -9,5 +9,6 @@
 #import "CardGameViewController.h"
 
 @interface SetCardViewController : CardGameViewController
+@property (strong, nonatomic) IBOutlet UIButton *addCardsButton;
 
 @end

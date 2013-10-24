@@ -16,9 +16,12 @@
 // designated initializer
 -(instancetype) initWithCardCount:(NSUInteger)count usingDeck: (Deck *) deck;
 - (void) chooseCardAtIndex:(NSUInteger)index;
+- (void) removeCardAtIndex:(NSUInteger) index;
+- (void) addCards:(NSUInteger) numCardsToAdd;
 - (Card *) cardAtIndex:(NSUInteger)index;
 - (int) getPointsForKey:(NSString *)key withDefaultValue:(int) val;
 
+@property (nonatomic, strong) Deck *deck;
 @property (nonatomic, readonly) NSInteger score;
 @property (nonatomic, strong) NSMutableArray *chosenCards;
 @property (nonatomic, strong) NSMutableArray *historyEntries; // of CardGameHistoryEntry
@@ -26,5 +29,7 @@
 
 // value indicates how many cards to match
 @property (nonatomic) NSUInteger numCardsInMatch;
+
+@property (nonatomic) NSUInteger currentCardCount;
 
 @end

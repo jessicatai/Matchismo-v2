@@ -14,5 +14,6 @@
 @property (nonatomic) int color;
 @property (nonatomic) int shape;
 @property (nonatomic) int shading;
+@property (nonatomic,getter=isChosen) BOOL chosen;
 
 @end

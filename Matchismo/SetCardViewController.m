@@ -10,6 +10,7 @@
 #import "SetCardView.h"
 #import "SetCardDeck.h"
 #import "SetCard.h"
+#import "SetCardCollectionViewCell.h"
 
 @interface SetCardViewController ()
 @property (weak, nonatomic) IBOutlet SetCardView *setCardView;
@@ -26,9 +27,9 @@
     {
         _game = [[CardMatchingGame alloc] initWithCardCount:self.startingCardCount usingDeck:[self createDeck]];
         _game.points = NSNotFound;
+        // set is always played with 3 cards
+        _game.numCardsInMatch = 3;
     }
-    // set is always played with 3 cards
-    _game.numCardsInMatch = 3;
     return _game;
 }
 
@@ -57,13 +58,49 @@
     NSLog(@"set swipe gestured recognized");
     [self drawRandomSetCard];
 }
+- (IBAction)touchAddCardsButton:(UIButton *)sender {
+    [self.game addCards:self.game.numCardsInMatch];
+    [self.cardCollectionView reloadData];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    [self drawRandomSetCard];
+    //[self drawRandomSetCard];
     [self.setCardView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.setCardView action:@selector(pinch:)]];
 }
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+                  cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SetCard" forIndexPath:indexPath];
+    
+    Card *card = [self.game cardAtIndex:indexPath.item];
+    [self updateCell:cell usingCard:card];
+    return cell;
+}
+
+
+-(void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card {
+    if ([cell isKindOfClass:[SetCardCollectionViewCell class]]) {
+        SetCardView *setCardView = ((SetCardCollectionViewCell *)cell).setCardView;
+        
+        if ([card isKindOfClass:[SetCard class]]) {
+            SetCard *setCard = (SetCard *)card;
+            setCardView.color = setCard.color;
+            setCardView.shape = setCard.shape;
+            setCardView.shading = setCard.shading;
+            setCardView.count = setCard.count;
+            setCardView.chosen = setCard.chosen;
+            if (setCard.isMatched) {
+                NSUInteger index = [self.cardCollectionView indexPathForCell:cell].item;
+                [self.game removeCardAtIndex:index];
+                [self.cardCollectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:index inSection:0]]];
+            }
+        }
+    }
+}
+
 
 @end

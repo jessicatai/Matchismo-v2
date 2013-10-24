@@ -15,6 +15,11 @@
 @end
 
 @implementation CardMatchingGame
+- (NSUInteger) currentCardCount
+{
+    return [self.cards count];
+}
+
 - (NSMutableArray *) chosenCards
 {
     if (!_chosenCards) _chosenCards = [[NSMutableArray alloc] init];
@@ -47,6 +52,7 @@
                 break;
             }
         }
+        _deck = deck;
     }
     return self;
 }
@@ -55,6 +61,16 @@
 - (Card *) cardAtIndex:(NSUInteger)index
 {
     return (index < [self.cards count]) ? self.cards[index] : nil;
+}
+
+- (void) removeCardAtIndex:(NSUInteger) index {
+    [self.cards removeObjectAtIndex:index];
+}
+
+- (void) addCards:(NSUInteger) numCardsToAdd {
+    for (int i = 0; i < numCardsToAdd; i++) {
+        [self.cards addObject:[self.deck drawRandomCard]];
+    }
 }
 
 -(void) addEntryWithCard:(NSMutableArray *) cards withPoints:(int) points
@@ -118,6 +134,7 @@ static const int MATCH_BONUS = 4;
         }
     }
 }
+
 
 // retrieve NSUserDefaults potentially changed in the settings
 - (int) getPointsForKey:(NSString *)key withDefaultValue:(int) val {

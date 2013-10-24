@@ -31,6 +31,11 @@
     [self setNeedsDisplay];
 }
 
+- (void) setChosen:(BOOL)chosen {
+    _chosen = chosen;
+    [self setNeedsDisplay];
+}
+
 #pragma mark - Drawing
 
 // Only override drawRect: if you perform custom drawing.
@@ -48,6 +53,14 @@
     [roundedRect stroke];
 
     [self drawPips]; // pips = non-face cards' display
+    
+    if ([self isChosen]) {
+        [self.layer setBorderWidth:3.0];
+        [self.layer setBorderColor:[[UIColor blueColor] CGColor] ];
+    } else {
+        [self.layer setBorderWidth:0.0]; // remove border when not chosen
+    }
+    
 }
 
 #pragma mark - Drawing card content
@@ -59,70 +72,61 @@
 #define SHAPE_LINE_WIDTH 0.02;
 
 - (void)drawPips {
-    CGFloat width = [self getPipHeight] / 2;
     CGFloat hoffset = self.bounds.size.width * SHAPE_OFFSET;
  
     if (self.count == 1 || self.count == 3) { // draw center item
-        [self drawPipsWithHorizontalOffset:0 withWidth:width];
+        [self drawPipsWithHorizontalOffset:0];
     }
     if (self.count == 2) {
-        [self drawPipsWithHorizontalOffset:hoffset * -0.75 withWidth:width];
-        [self drawPipsWithHorizontalOffset:hoffset * 0.75 withWidth:width];
+        [self drawPipsWithHorizontalOffset:hoffset * -0.75];
+        [self drawPipsWithHorizontalOffset:hoffset * 0.75];
     }
     if (self.count == 3) { // draw left and right of center
-        [self drawPipsWithHorizontalOffset:hoffset * -1.5 withWidth:width];
-        [self drawPipsWithHorizontalOffset:hoffset * 1.5 withWidth:width];
+        [self drawPipsWithHorizontalOffset:hoffset * -1.5];
+        [self drawPipsWithHorizontalOffset:hoffset * 1.5];
     }
 }
 
-- (void)drawPipsWithHorizontalOffset:(CGFloat)hoffset
-                          withWidth:(CGFloat) width {
+- (void)drawPipsWithHorizontalOffset:(CGFloat)hoffset {
     CGPoint middle = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
     CGPoint pipOrigin = CGPointMake(
                                     middle.x-hoffset,
                                     middle.y
                                     );
     if (self.shape == 1) {  // squiggle
-        [self drawSquiggleWithOrigin:pipOrigin withWidth:width];
+        [self drawSquiggleWithOrigin:pipOrigin];
     }
     else if (self.shape == 2) { // oval
-        [self drawCircleWithOrigin:pipOrigin withWidth:width];
+        [self drawCircleWithOrigin:pipOrigin];
     }
     else if (self.shape == 3) { // diamond
-        [self drawDiamondWithOrigin:pipOrigin withWidth:width];
+        [self drawDiamondWithOrigin:pipOrigin];
     }
     
 }
 
 
-- (CGFloat) getPipHeight {
-    UIFont *pipFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    pipFont = [pipFont fontWithSize:[pipFont pointSize] * self.bounds.size.width * PIP_FONT_SCALE_FACTOR];
-    return [pipFont lineHeight];
-}
-
 #define SQUIGGLE_WIDTH 0.12
 #define SQUIGGLE_HEIGHT 0.3
 #define SQUIGGLE_FACTOR 0.8
 // Honor code notice: I googled for help with drawing a squiggle
-- (void) drawSquiggleWithOrigin:(CGPoint) point
-                              withWidth:(CGFloat) width {
+- (void) drawSquiggleWithOrigin:(CGPoint) pipOrigin {
     CGFloat dx = self.bounds.size.width * SQUIGGLE_WIDTH / 2;
     CGFloat dy = self.bounds.size.height * SQUIGGLE_HEIGHT / 2;
     CGFloat dsqx = dx * SQUIGGLE_FACTOR;
     CGFloat dsqy = dy * SQUIGGLE_FACTOR;
     UIBezierPath *path = [[UIBezierPath alloc] init];
-    [path moveToPoint:CGPointMake(point.x - dx, point.y - dy)];
-    [path addQuadCurveToPoint:CGPointMake(point.x + dx, point.y - dy)
-                 controlPoint:CGPointMake(point.x - dsqx, point.y - dy - dsqy)];
-    [path addCurveToPoint:CGPointMake(point.x + dx, point.y + dy)
-            controlPoint1:CGPointMake(point.x + dx + dsqx, point.y - dy + dsqy)
-            controlPoint2:CGPointMake(point.x + dx - dsqx, point.y + dy - dsqy)];
-    [path addQuadCurveToPoint:CGPointMake(point.x - dx, point.y + dy)
-                 controlPoint:CGPointMake(point.x + dsqx, point.y + dy + dsqy)];
-    [path addCurveToPoint:CGPointMake(point.x - dx, point.y - dy)
-            controlPoint1:CGPointMake(point.x - dx - dsqx, point.y + dy - dsqy)
-            controlPoint2:CGPointMake(point.x - dx + dsqx, point.y - dy + dsqy)];
+    [path moveToPoint:CGPointMake(pipOrigin.x - dx, pipOrigin.y - dy)];
+    [path addQuadCurveToPoint:CGPointMake(pipOrigin.x + dx, pipOrigin.y - dy)
+                 controlPoint:CGPointMake(pipOrigin.x - dsqx, pipOrigin.y - dy - dsqy)];
+    [path addCurveToPoint:CGPointMake(pipOrigin.x + dx, pipOrigin.y + dy)
+            controlPoint1:CGPointMake(pipOrigin.x + dx + dsqx, pipOrigin.y - dy + dsqy)
+            controlPoint2:CGPointMake(pipOrigin.x + dx - dsqx, pipOrigin.y + dy - dsqy)];
+    [path addQuadCurveToPoint:CGPointMake(pipOrigin.x - dx, pipOrigin.y + dy)
+                 controlPoint:CGPointMake(pipOrigin.x + dsqx, pipOrigin.y + dy + dsqy)];
+    [path addCurveToPoint:CGPointMake(pipOrigin.x - dx, pipOrigin.y - dy)
+            controlPoint1:CGPointMake(pipOrigin.x - dx - dsqx, pipOrigin.y + dy - dsqy)
+            controlPoint2:CGPointMake(pipOrigin.x - dx + dsqx, pipOrigin.y - dy + dsqy)];
     path.lineWidth = self.bounds.size.width * SHAPE_LINE_WIDTH;
     
     UIColor *color = [self getStrokeColor:self.color];
@@ -130,13 +134,12 @@
     
     [color setStroke];
     [path stroke];
-
+    
 }
 
 #define OVAL_WIDTH 0.15
 #define OVAL_HEIGHT 0.3
-- (void) drawCircleWithOrigin:(CGPoint) pipOrigin
-                                       withWidth:(CGFloat) width {
+- (void) drawCircleWithOrigin:(CGPoint) pipOrigin {
     
     CGFloat dx = self.bounds.size.width * OVAL_WIDTH / 2;
     CGFloat dy = self.bounds.size.height * OVAL_HEIGHT / 2;
@@ -153,8 +156,7 @@
 
 #define DIAMOND_WIDTH 0.2
 #define DIAMOND_HEIGHT 0.3
--(void) drawDiamondWithOrigin:(CGPoint) pipOrigin
-                             withWidth:(CGFloat) width {
+-(void) drawDiamondWithOrigin:(CGPoint) pipOrigin {
     CGFloat dx = self.bounds.size.width * DIAMOND_WIDTH / 2;
     CGFloat dy = self.bounds.size.height * DIAMOND_HEIGHT / 2;
     
@@ -178,7 +180,7 @@
     return colors[[[NSNumber alloc] initWithInt:color] ];
 }
 
-#define STRIPES_OFFSET 0.03
+#define STRIPES_OFFSET 0.04
 - (void)shadePath:(UIBezierPath *)path
 {
     if (self.shading == 1) {

@@ -34,8 +34,9 @@
 
 - (NSUInteger) startingCardCount
 {
-    return 22;
+    return 30;
 }
+
 
 - (Deck *)createDeck
 {
