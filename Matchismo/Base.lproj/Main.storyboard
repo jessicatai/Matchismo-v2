@@ -459,7 +459,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1886" y="-473"/>
+            <point key="canvasLocation" x="2354" y="-905"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="xqf-Iq-gWB">
@@ -971,7 +971,82 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lAL-4Z-EBl" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1886" y="483"/>
+            <point key="canvasLocation" x="2318" y="1043"/>
+        </scene>
+        <!--Playing Card View Controller-->
+        <scene sceneID="iDL-xK-74b">
+            <objects>
+                <viewController id="LCl-6h-Ko1" customClass="PlayingCardViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="g86-ba-YT3"/>
+                        <viewControllerLayoutGuide type="bottom" id="OCv-ed-PZF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fQ3-Cr-hd8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pNj-8z-ATD">
+                                <rect key="frame" x="0.0" y="61" width="320" height="335"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <gestureRecognizers/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cKN-1v-Dxr">
+                                    <size key="itemSize" width="40" height="60"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlayingCard" id="lqg-h1-12A" customClass="PlayingCardCollectionViewCell">
+                                        <rect key="frame" x="0.0" y="64" width="40" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cOQ-Ik-Klp" customClass="PlayingCardView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <outlet property="playingCardView" destination="cOQ-Ik-Klp" id="lG6-uR-upn"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="LCl-6h-Ko1" id="hJt-6b-rc9"/>
+                                    <outlet property="delegate" destination="LCl-6h-Ko1" id="KCd-K6-dcf"/>
+                                    <outletCollection property="gestureRecognizers" destination="NGr-jb-5En" appends="YES" id="aO9-lD-qML"/>
+                                </connections>
+                            </collectionView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uyg-gM-eFc">
+                                <rect key="frame" x="20" y="404" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="0K3-Yt-j4E"/>
+                    <connections>
+                        <outlet property="cardCollectionView" destination="pNj-8z-ATD" id="cUH-t9-WhL"/>
+                        <outlet property="scoreLabel" destination="uyg-gM-eFc" id="aSc-Tw-E0C"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UQ3-vQ-4bv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="rU1-KT-lX2"/>
+                <tapGestureRecognizer id="NGr-jb-5En">
+                    <connections>
+                        <action selector="touchCard:" destination="LCl-6h-Ko1" id="142-j0-exj"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1875" y="-466"/>
         </scene>
         <!--Navigation Controller - Matchismo-->
         <scene sceneID="pdS-VE-dVK">
@@ -985,7 +1060,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="Fay-Pz-ZDb"/>
+                        <segue destination="LCl-6h-Ko1" kind="relationship" relationship="rootViewController" id="v6F-0V-joQ"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rcd-uz-WOk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1004,7 +1079,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="fFg-0Y-BMr" kind="relationship" relationship="rootViewController" id="bFz-xh-gdg"/>
+                        <segue destination="NIE-oc-PFb" kind="relationship" relationship="rootViewController" id="whI-Du-SSl"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mOE-8g-THu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1125,9 +1200,107 @@
             </objects>
             <point key="canvasLocation" x="1354" y="1242"/>
         </scene>
+        <!--Set Card View Controller-->
+        <scene sceneID="Ya5-is-7Nh">
+            <objects>
+                <viewController id="NIE-oc-PFb" customClass="SetCardViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Xkl-x2-hcR"/>
+                        <viewControllerLayoutGuide type="bottom" id="niW-9j-Ays"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="puI-7D-aPj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IiD-2S-ft9" customClass="SetCardView">
+                                <rect key="frame" x="74" y="104" width="120" height="80"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Lxe-yL-cHa" appends="YES" id="aJV-Mp-liu"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="HWj-iX-eKG"/>
+                    <connections>
+                        <outlet property="setCardView" destination="IiD-2S-ft9" id="0oI-VK-GE7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cgi-tA-mGr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="Lxe-yL-cHa">
+                    <connections>
+                        <action selector="swipe:" destination="NIE-oc-PFb" id="Aq0-Nl-Sey"/>
+                    </connections>
+                </swipeGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1875" y="483"/>
+        </scene>
     </scenes>
     <resources>
         <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardback" width="80" height="120"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
+        <image name="cardfront" width="64" height="96"/>
         <image name="cardfront" width="64" height="96"/>
         <image name="gear_icon" width="30" height="30"/>
         <image name="matchismo_icon" width="30" height="30"/>
@@ -1140,6 +1313,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="WLi-fG-GIB"/>
+        <segue reference="m2t-CP-1Io"/>
     </inferredMetricsTieBreakers>
 </document>

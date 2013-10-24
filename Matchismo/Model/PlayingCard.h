@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) NSString *suit;
 @property (nonatomic) NSUInteger rank;
+@property (nonatomic, getter=isFaceUp) BOOL faceUp;
+@property (nonatomic, getter=isUnplayable) BOOL unplayable;
 
 + (NSArray *)validSuits;
 + (NSUInteger)maxRank;

@@ -35,19 +35,19 @@
     return [[SetCardDeck alloc] init];
 }
 
-- (NSAttributedString *)titleForCard:(SetCard *) card
-{
-    UIColor *color = [self getStrokeColor: card.color];
-    UIColor *shadingColor = [self getShadingColor:color withShading:card.shading];
-    NSString *shapeText = [self getCardTextWithShape:card.shape];
-    NSDictionary *attrsDictionary =@{NSForegroundColorAttributeName: shadingColor,
-                                     NSStrokeWidthAttributeName : @-5,
-                                     NSStrokeColorAttributeName : color};
-    NSAttributedString *attrString = [[NSAttributedString alloc]
-                                      initWithString: [self getCardText:shapeText withCount:card.count]
-                                      attributes:attrsDictionary];
-    return attrString;
-}
+//- (NSAttributedString *)titleForCard:(SetCard *) card
+//{
+//    UIColor *color = [self getStrokeColor: card.color];
+//    UIColor *shadingColor = [self getShadingColor:color withShading:card.shading];
+//    NSString *shapeText = [self getCardTextWithShape:card.shape];
+//    NSDictionary *attrsDictionary =@{NSForegroundColorAttributeName: shadingColor,
+//                                     NSStrokeWidthAttributeName : @-5,
+//                                     NSStrokeColorAttributeName : color};
+//    NSAttributedString *attrString = [[NSAttributedString alloc]
+//                                      initWithString: [self getCardText:shapeText withCount:card.count]
+//                                      attributes:attrsDictionary];
+//    return attrString;
+//}
 
 // title is always showing return same value as title for card
 - (NSAttributedString *)getTextForCard:(Card *) card

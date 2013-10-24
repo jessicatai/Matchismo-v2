@@ -16,14 +16,18 @@
 
 @implementation CardGameViewController
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"Print History"]) {
-        if ([segue.destinationViewController isKindOfClass:[HistoryViewController class]]) {
-            HistoryViewController *hvc = (HistoryViewController *)segue.destinationViewController;
-            hvc.historyEntries = self.game.historyEntries;
-        }
-    }
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.startingCardCount;
+
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+                  cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return nil;
+}
+
+-(void) updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card {
 }
 
 - (void) viewDidLoad
@@ -55,6 +59,15 @@
     if (!_attributedDescription) _attributedDescription = [[NSMutableAttributedString alloc] init];
     return _attributedDescription;
 }
+- (IBAction)touchCard:(UITapGestureRecognizer *)sender {
+    CGPoint tapLocation = [sender locationInView:self.cardCollectionView];
+    NSIndexPath *indexPath = [self.cardCollectionView indexPathForItemAtPoint:tapLocation];
+    
+    if (indexPath) {
+        [self.game chooseCardAtIndex:indexPath.item];
+        [self updateUI];
+    }
+}
 
 - (IBAction)touchCardButton:(UIButton *)sender
 {
@@ -83,36 +96,13 @@
 
 - (void)updateUI
 {
-    NSMutableAttributedString *cardsText = [[NSMutableAttributedString alloc] initWithString:@""];
-    for (UIButton *cardButton in self.cardButtons) {
-        int cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
-        Card *card = [self.game cardAtIndex:cardButtonIndex];
-        [cardButton setAttributedTitle:[self titleForCard:card] forState:UIControlStateNormal];
-        [cardButton setBackgroundImage:[self backgroundImageForCard:card] forState:UIControlStateNormal];
-        
-        // print out text for chosen cards with non-empty titles
-        if ([self.game.chosenCards containsObject:card]) {
-            [cardsText appendAttributedString: [self getTextForCard:card]];
-            // space out card titles with tab
-            [cardsText appendAttributedString:[[NSAttributedString  alloc] initWithString: @"\t"]];
-        }
-        
-        cardButton.enabled = !card.isMatched;
-        self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
-    }
-    
-    // TODO: print out chosen cards thus far
-    
-    self.cardsLabel.attributedText = cardsText;
-    NSString *description = [self setDescriptionTextForPoints:self.game.points];
-    self.descriptionLabel.attributedText = [[NSAttributedString alloc] initWithString: description];
-    
-    // add new match/mismatch items to history
-    if (![description isEqualToString:@""]){
-        NSMutableAttributedString *entryText = [[NSMutableAttributedString alloc] initWithAttributedString:cardsText];
-        [entryText appendAttributedString: [[NSAttributedString alloc] initWithString: description]];
-        [self.game.historyEntries addObject:entryText];
-    }
+    for (UICollectionViewCell *cell in [self.cardCollectionView visibleCells]) {
+        NSIndexPath *indexPath = [self.cardCollectionView indexPathForCell:cell];
+        Card *card = [self.game cardAtIndex:indexPath.item];
+        [self updateCell:cell usingCard:card];
+    }    
+  
+    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
 }
 
 // NSNotFound implies not a (mis)match action

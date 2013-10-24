@@ -57,25 +57,25 @@
                  withShadingSet:(NSMutableSet *) shadingSet
                    withCountSet:(NSMutableSet *) countSet
 {
-    [shapeSet addObject:card.shape];
-    [colorSet addObject:card.color];
-    [shadingSet addObject:card.shading];
+    [shapeSet addObject:[NSNumber numberWithInt:card.shape]];
+    [colorSet addObject:[NSNumber numberWithInt:card.color]];
+    [shadingSet addObject:[NSNumber numberWithInt:card.shading]];
     [countSet addObject:[NSNumber numberWithInt:card.count]];
 }
 
 + (NSArray *)validShapes
 {
-    return @[@"triangle", @"circle", @"square"];
+    return @[@1,@2,@3];
 }
 
 + (NSArray *)validColor
 {
-    return @[@"green", @"red", @"blue"];
+    return @[@1,@2,@3];
 }
 
 + (NSArray *)validShading
 {
-    return @[@"solid", @"striped", @"blank"];
+    return @[@1,@2,@3];
 }
 
 + (NSArray *)validCounts
