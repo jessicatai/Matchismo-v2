@@ -26,4 +26,6 @@
 - (NSAttributedString *)titleForCard:(Card *) card; // abstract
 - (UIImage *)backgroundImageForCard:(Card *)card; // abstract
 
+- (void) resetUIElements; // specific to each inherited subclass view
+
 @end

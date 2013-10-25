@@ -33,6 +33,7 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    self.cardCollectionView.alwaysBounceVertical = YES; // always scrollable
     // initialize game without waiting for user input
     [self updateUI];
 }
@@ -59,13 +60,18 @@
     if (!_attributedDescription) _attributedDescription = [[NSMutableAttributedString alloc] init];
     return _attributedDescription;
 }
+
 - (IBAction)touchCard:(UITapGestureRecognizer *)sender {
     NSLog(@"tap gesture recognized");
     CGPoint tapLocation = [sender locationInView:self.cardCollectionView];
     NSIndexPath *indexPath = [self.cardCollectionView indexPathForItemAtPoint:tapLocation];
     
+    
     if (indexPath) {
         [self.game chooseCardAtIndex:indexPath.item];
+        
+        UICollectionViewCell *c = [self.cardCollectionView cellForItemAtIndexPath:indexPath];
+        [self animateTouchCardAction:c];
         [self updateUI];
     }
 }
@@ -78,6 +84,7 @@
     
     int chosenButtonIndex = [self.cardButtons indexOfObject:sender];
     [self.game chooseCardAtIndex:chosenButtonIndex];
+    
     [self updateUI];
 }
 
@@ -87,12 +94,23 @@
     self.game = nil;
     [self.game.chosenCards removeAllObjects];
     
+    // remove all cells from collection view
+    [self.cardCollectionView reloadData];
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 0)];
+    [self.cardCollectionView deleteSections:indexSet];
+    
     // reset the score label to 0
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
     
+    [self resetUIElements];
     [self updateUI];
 }
 
+- (void) resetUIElements {
+}
+
+- (void) animateTouchCardAction:(UICollectionViewCell *)cell {
+}
 
 - (void)updateUI
 {

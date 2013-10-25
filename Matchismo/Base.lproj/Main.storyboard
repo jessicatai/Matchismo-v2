@@ -473,8 +473,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="iib-eE-Awz" kind="relationship" relationship="viewControllers" id="30p-od-eVO"/>
-                        <segue destination="aTQ-6C-tsI" kind="relationship" relationship="viewControllers" id="PcK-8M-Tko"/>
+                        <segue destination="LCl-6h-Ko1" kind="relationship" relationship="viewControllers" id="nSE-kd-n8X"/>
+                        <segue destination="NIE-oc-PFb" kind="relationship" relationship="viewControllers" id="RUQ-V2-ujH"/>
                         <segue destination="xEf-wJ-I5d" kind="relationship" relationship="viewControllers" id="QOa-lm-h9T"/>
                     </connections>
                 </tabBarController>
@@ -973,7 +973,7 @@
             </objects>
             <point key="canvasLocation" x="2318" y="1043"/>
         </scene>
-        <!--Playing Card View Controller-->
+        <!--Playing Card View Controller - Matchismo-->
         <scene sceneID="iDL-xK-74b">
             <objects>
                 <viewController id="LCl-6h-Ko1" customClass="PlayingCardViewController" sceneMemberID="viewController">
@@ -986,7 +986,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pNj-8z-ATD">
-                                <rect key="frame" x="0.0" y="60" width="320" height="336"/>
+                                <rect key="frame" x="20" y="28" width="280" height="357"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <gestureRecognizers/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cKN-1v-Dxr">
@@ -997,7 +997,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlayingCard" id="lqg-h1-12A" customClass="PlayingCardCollectionViewCell">
-                                        <rect key="frame" x="0.0" y="64" width="40" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
@@ -1023,23 +1023,58 @@
                                 </connections>
                             </collectionView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uyg-gM-eFc">
-                                <rect key="frame" x="20" y="404" width="280" height="21"/>
+                                <rect key="frame" x="20" y="402" width="64" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rji-Pu-7gy">
+                                <rect key="frame" x="236" y="393" width="64" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="XD9-0P-Xgf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Re-deal">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="touchAddCardsButton:" destination="NIE-oc-PFb" eventType="touchUpInside" id="sWL-3p-RYz"/>
+                                    <action selector="touchRestartButton:" destination="LCl-6h-Ko1" eventType="touchUpInside" id="zzA-BI-k04"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="pNj-8z-ATD" secondAttribute="trailing" constant="20" symbolic="YES" id="Hx7-6T-JWK"/>
+                            <constraint firstItem="rji-Pu-7gy" firstAttribute="top" secondItem="pNj-8z-ATD" secondAttribute="bottom" constant="8" id="USa-AL-RGa"/>
+                            <constraint firstItem="OCv-ed-PZF" firstAttribute="top" secondItem="uyg-gM-eFc" secondAttribute="bottom" constant="20" symbolic="YES" id="Ytw-vD-Pxe"/>
+                            <constraint firstAttribute="trailing" secondItem="rji-Pu-7gy" secondAttribute="trailing" constant="20" symbolic="YES" id="Zkg-Iz-IOW"/>
+                            <constraint firstItem="uyg-gM-eFc" firstAttribute="leading" secondItem="fQ3-Cr-hd8" secondAttribute="leading" constant="20" symbolic="YES" id="dL1-Ne-dIW"/>
+                            <constraint firstItem="pNj-8z-ATD" firstAttribute="top" secondItem="g86-ba-YT3" secondAttribute="bottom" constant="20" symbolic="YES" id="ggh-ye-Mgf"/>
+                            <constraint firstItem="OCv-ed-PZF" firstAttribute="top" secondItem="rji-Pu-7gy" secondAttribute="bottom" constant="20" symbolic="YES" id="jF0-uV-B5z"/>
+                            <constraint firstItem="pNj-8z-ATD" firstAttribute="leading" secondItem="fQ3-Cr-hd8" secondAttribute="leading" constant="20" symbolic="YES" id="teJ-ba-C4U"/>
+                            <constraint firstItem="rji-Pu-7gy" firstAttribute="top" secondItem="pNj-8z-ATD" secondAttribute="bottom" constant="8" id="zrN-0H-OwN"/>
+                        </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Matchismo" image="matchismo_icon" id="vxk-XB-ykY"/>
                     <navigationItem key="navigationItem" id="0K3-Yt-j4E"/>
                     <connections>
                         <outlet property="cardCollectionView" destination="pNj-8z-ATD" id="cUH-t9-WhL"/>
+                        <outlet property="flipCardGesture" destination="rU1-KT-lX2" id="Wli-8z-P1C"/>
+                        <outlet property="restartButton" destination="rji-Pu-7gy" id="7Jc-CF-PQq"/>
                         <outlet property="scoreLabel" destination="uyg-gM-eFc" id="aSc-Tw-E0C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UQ3-vQ-4bv" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="right" id="rU1-KT-lX2"/>
+                <swipeGestureRecognizer direction="right" id="rU1-KT-lX2">
+                    <connections>
+                        <action selector="swipe:" destination="LCl-6h-Ko1" id="bqM-zy-xfj"/>
+                    </connections>
+                </swipeGestureRecognizer>
                 <tapGestureRecognizer id="NGr-jb-5En">
                     <connections>
                         <action selector="touchCard:" destination="LCl-6h-Ko1" id="142-j0-exj"/>
@@ -1047,44 +1082,6 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1875" y="-466"/>
-        </scene>
-        <!--Navigation Controller - Matchismo-->
-        <scene sceneID="pdS-VE-dVK">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iib-eE-Awz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Matchismo" image="matchismo_icon" id="hIm-RZ-kZT"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dB1-ke-hzU">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="LCl-6h-Ko1" kind="relationship" relationship="rootViewController" id="v6F-0V-joQ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rcd-uz-WOk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1360" y="-473"/>
-        </scene>
-        <!--Navigation Controller - Set-->
-        <scene sceneID="eV5-2g-rrb">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aTQ-6C-tsI" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Set" image="set_icon" id="8vX-YQ-S1z"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4Oc-lL-UKn">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="NIE-oc-PFb" kind="relationship" relationship="rootViewController" id="whI-Du-SSl"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mOE-8g-THu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1360" y="483"/>
         </scene>
         <!--Card Game Settings View Controller - Settings-->
         <scene sceneID="P2B-5Z-gnd">
@@ -1200,7 +1197,7 @@
             </objects>
             <point key="canvasLocation" x="1354" y="1242"/>
         </scene>
-        <!--Set Card View Controller-->
+        <!--Set Card View Controller - Set-->
         <scene sceneID="Ya5-is-7Nh">
             <objects>
                 <viewController id="NIE-oc-PFb" customClass="SetCardViewController" sceneMemberID="viewController">
@@ -1212,8 +1209,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7x4-mN-JRv">
-                                <rect key="frame" x="0.0" y="65" width="320" height="326"/>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7x4-mN-JRv">
+                                <rect key="frame" x="20" y="28" width="280" height="357"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <gestureRecognizers/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NwH-92-DY8">
@@ -1224,13 +1221,13 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SetCard" id="5te-VZ-QqL" customClass="SetCardCollectionViewCell">
-                                        <rect key="frame" x="0.0" y="64" width="40" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="quL-bZ-ZOW" customClass="SetCardView">
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="quL-bZ-ZOW" customClass="SetCardView">
                                                     <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -1249,18 +1246,32 @@
                                     <outletCollection property="gestureRecognizers" destination="Hyl-oU-Nuj" appends="YES" id="fOA-wV-R0K"/>
                                 </connections>
                             </collectionView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l7b-5g-Wsw">
-                                <rect key="frame" x="20" y="399" width="280" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Score: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l7b-5g-Wsw">
+                                <rect key="frame" x="20" y="405" width="280" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NYy-SC-k1s">
-                                <rect key="frame" x="228" y="396" width="72" height="28"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m7i-K9-1no">
+                                <rect key="frame" x="158" y="393" width="54" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="+3 cards" backgroundImage="cardfront">
+                                <state key="normal" title="Re-deal">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="touchRestartButton:" destination="NIE-oc-PFb" eventType="touchUpInside" id="w1l-vp-XrW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NYy-SC-k1s">
+                                <rect key="frame" x="240" y="393" width="60" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="+3 cards">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1270,11 +1281,25 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="niW-9j-Ays" firstAttribute="top" secondItem="NYy-SC-k1s" secondAttribute="bottom" constant="20" symbolic="YES" id="0dy-Lz-tpY"/>
+                            <constraint firstItem="niW-9j-Ays" firstAttribute="top" secondItem="m7i-K9-1no" secondAttribute="bottom" constant="20" symbolic="YES" id="0jv-rK-zE2"/>
+                            <constraint firstAttribute="trailing" secondItem="NYy-SC-k1s" secondAttribute="trailing" constant="20" symbolic="YES" id="3d5-9C-UAg"/>
+                            <constraint firstItem="7x4-mN-JRv" firstAttribute="leading" secondItem="puI-7D-aPj" secondAttribute="leading" constant="20" symbolic="YES" id="4HP-y1-HdP"/>
+                            <constraint firstItem="l7b-5g-Wsw" firstAttribute="leading" secondItem="puI-7D-aPj" secondAttribute="leading" constant="20" symbolic="YES" id="5xj-qG-pb9"/>
+                            <constraint firstItem="niW-9j-Ays" firstAttribute="top" secondItem="l7b-5g-Wsw" secondAttribute="bottom" constant="20" symbolic="YES" id="HBc-ae-KKn"/>
+                            <constraint firstAttribute="trailing" secondItem="7x4-mN-JRv" secondAttribute="trailing" constant="20" symbolic="YES" id="Hgw-Jg-6cz"/>
+                            <constraint firstItem="NYy-SC-k1s" firstAttribute="leading" secondItem="m7i-K9-1no" secondAttribute="trailing" constant="28" id="fHQ-QZ-sCz"/>
+                            <constraint firstItem="NYy-SC-k1s" firstAttribute="top" secondItem="7x4-mN-JRv" secondAttribute="bottom" constant="8" id="g4B-ih-M1f"/>
+                            <constraint firstItem="7x4-mN-JRv" firstAttribute="top" secondItem="Xkl-x2-hcR" secondAttribute="bottom" constant="20" symbolic="YES" id="r8c-LO-IkG"/>
+                        </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Set" image="set_icon" id="ytt-Cd-5H3"/>
                     <navigationItem key="navigationItem" id="HWj-iX-eKG"/>
                     <connections>
                         <outlet property="addCardsButton" destination="NYy-SC-k1s" id="XEW-Ex-pRT"/>
                         <outlet property="cardCollectionView" destination="7x4-mN-JRv" id="xbl-kI-QI0"/>
+                        <outlet property="restartButton" destination="m7i-K9-1no" id="E8c-kQ-bTl"/>
                         <outlet property="scoreLabel" destination="l7b-5g-Wsw" id="hcW-Wv-oae"/>
                     </connections>
                 </viewController>
@@ -1290,7 +1315,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1875" y="483"/>
+            <point key="canvasLocation" x="1809" y="530"/>
         </scene>
     </scenes>
     <resources>
@@ -1324,7 +1349,6 @@
         <image name="cardback" width="80" height="120"/>
         <image name="cardback" width="80" height="120"/>
         <image name="cardback" width="80" height="120"/>
-        <image name="cardfront" width="64" height="96"/>
         <image name="cardfront" width="64" height="96"/>
         <image name="cardfront" width="64" height="96"/>
         <image name="cardfront" width="64" height="96"/>

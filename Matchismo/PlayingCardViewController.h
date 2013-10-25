@@ -9,5 +9,6 @@
 #import "CardGameViewController.h"
 
 @interface PlayingCardViewController : CardGameViewController
+@property (strong, nonatomic) IBOutlet UISwipeGestureRecognizer *flipCardGesture;
 
 @end

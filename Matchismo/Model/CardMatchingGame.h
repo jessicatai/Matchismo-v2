@@ -17,7 +17,7 @@
 -(instancetype) initWithCardCount:(NSUInteger)count usingDeck: (Deck *) deck;
 - (void) chooseCardAtIndex:(NSUInteger)index;
 - (void) removeCardAtIndex:(NSUInteger) index;
-- (void) addCards:(NSUInteger) numCardsToAdd;
+- (bool) addCards:(NSUInteger) numCardsToAdd;
 - (Card *) cardAtIndex:(NSUInteger)index;
 - (int) getPointsForKey:(NSString *)key withDefaultValue:(int) val;
 

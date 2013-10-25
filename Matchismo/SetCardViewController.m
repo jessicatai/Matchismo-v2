@@ -58,16 +58,28 @@
     NSLog(@"set swipe gestured recognized");
     [self drawRandomSetCard];
 }
+
+// TODO: after deck is exhausted, click re-deal then both de-deal and +3 card buttons are disabled
 - (IBAction)touchAddCardsButton:(UIButton *)sender {
-    [self.game addCards:self.game.numCardsInMatch];
+    bool hasCardsLeft = [self.game addCards:self.game.numCardsInMatch];
+    NSLog(hasCardsLeft ? @"Cards left" : @"No cards left");
+    // when there aren't any cards left, disable the add cards button
+    [sender setEnabled:hasCardsLeft];
+    sender.alpha = hasCardsLeft ? 1.0 : 0.3;
     [self.cardCollectionView reloadData];
+}
+
+- (void) resetUIElements {
+    // re-enable all the buttons
+    [self.restartButton setEnabled:YES];
+    [self.addCardsButton setEnabled:YES];
+    self.addCardsButton.alpha = 1.0;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    //[self drawRandomSetCard];
     [self.setCardView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.setCardView action:@selector(pinch:)]];
 }
 

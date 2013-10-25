@@ -108,13 +108,13 @@
 
 #define SQUIGGLE_WIDTH 0.12
 #define SQUIGGLE_HEIGHT 0.3
-#define SQUIGGLE_FACTOR 0.8
+#define SQUIGGLE_CONST 0.8
 // Honor code notice: I googled for help with drawing a squiggle
 - (void) drawSquiggleWithOrigin:(CGPoint) pipOrigin {
     CGFloat dx = self.bounds.size.width * SQUIGGLE_WIDTH / 2;
     CGFloat dy = self.bounds.size.height * SQUIGGLE_HEIGHT / 2;
-    CGFloat dsqx = dx * SQUIGGLE_FACTOR;
-    CGFloat dsqy = dy * SQUIGGLE_FACTOR;
+    CGFloat dsqx = dx * SQUIGGLE_CONST;
+    CGFloat dsqy = dy * SQUIGGLE_CONST;
     UIBezierPath *path = [[UIBezierPath alloc] init];
     [path moveToPoint:CGPointMake(pipOrigin.x - dx, pipOrigin.y - dy)];
     [path addQuadCurveToPoint:CGPointMake(pipOrigin.x + dx, pipOrigin.y - dy)

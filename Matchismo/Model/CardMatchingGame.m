@@ -67,10 +67,18 @@
     [self.cards removeObjectAtIndex:index];
 }
 
-- (void) addCards:(NSUInteger) numCardsToAdd {
+- (bool) addCards:(NSUInteger) numCardsToAdd {
+    bool hasCardsLeft = YES;
     for (int i = 0; i < numCardsToAdd; i++) {
-        [self.cards addObject:[self.deck drawRandomCard]];
+        Card *card = [self.deck drawRandomCard];
+        if (card) {
+            [self.cards addObject:card];
+        } else {
+            hasCardsLeft = NO;
+            break;
+        }
     }
+    return hasCardsLeft;
 }
 
 -(void) addEntryWithCard:(NSMutableArray *) cards withPoints:(int) points

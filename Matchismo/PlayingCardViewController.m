@@ -53,9 +53,29 @@
     }
 }
 - (IBAction)swipe:(UISwipeGestureRecognizer *)sender {
-    if (!self.playingCardView.faceUp) [self drawRandomPlayingCard];
-    self.playingCardView.faceUp = !self.playingCardView.faceUp;
+    NSLog(@"in swipe");
+    [UIView transitionWithView:self.playingCardView
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:^{
+                        self.playingCardView.faceUp = !self.playingCardView.faceUp;
+                    }completion: NULL];
 }
+
+// flip the playing card over upon tap gesture
+- (void) animateTouchCardAction:(UICollectionViewCell *)cell {
+    if ([cell isKindOfClass:[PlayingCardCollectionViewCell class]]){
+        PlayingCardCollectionViewCell *playingCardCell = (PlayingCardCollectionViewCell *) cell;
+    
+        [UIView transitionWithView:playingCardCell.playingCardView
+                          duration:0.5
+                           options:UIViewAnimationOptionTransitionFlipFromLeft
+                        animations:^{
+                            playingCardCell.playingCardView.faceUp= !playingCardCell.playingCardView.faceUp;
+                        }completion: NULL];
+        }
+    }
+
 
 - (void)viewDidLoad
 {
