@@ -106,14 +106,20 @@
         setCardView.count = setCard.count;
         setCardView.chosen = setCard.chosen;
         if (setCard.isMatched) {
+            NSLog(@"is matched");
             [UIView transitionWithView:setCardView.superview
-                              duration:1.0
+                              duration:0.5
                                options:UIViewAnimationOptionTransitionCrossDissolve
                             animations:^{
                                 NSUInteger index = [[self.gameView subviews] indexOfObject:setCardView];
-                                [self.game removeCardAtIndex:index];
                                 [setCardView removeFromSuperview];
-                            }completion: NULL];
+                                [self.game removeCardAtIndex:index];
+                            }completion:^(BOOL finished) {
+                                if (finished) {
+                                    [self updateGridWithAnimation:NO];
+                                    [self updateUI];
+                                }
+                            }];
             self.currentCardCount = [[self.gameView subviews] count];
         }
     }

@@ -22,9 +22,10 @@
 @property (nonatomic) Grid *grid;
 @property (nonatomic) NSUInteger difficulty;
 @property (nonatomic) NSUInteger startingCardCount;
+
 @property (nonatomic) CGFloat pinchScale;
 
-@property (strong, nonatomic) UIAttachmentBehavior *attachment;
+@property (strong, nonatomic) NSMutableArray *attachments;
 @property (nonatomic) bool isInPinchedState;
 
 @end
@@ -50,6 +51,11 @@
         _grid.minimumNumberOfCells = self.currentCardCount;
     }
     return _grid;
+}
+
+- (NSMutableArray *) attachments {
+    if (!_attachments) {_attachments = [[NSMutableArray alloc] init]; }
+    return _attachments;
 }
 
 #define DEFAULT_PINCH_SCALE 0.9
@@ -136,47 +142,49 @@ CGFloat distanceBetweenTwoPoints(CGPoint point1, CGPoint point2)
     return sqrt(dx*dx + dy*dy );
 };
 
-- (IBAction)panPinchedCards:(UIPanGestureRecognizer *)sender {
-    NSLog(@"recognized panPinchedCards gesture");
-    CGPoint gesturePoint = [sender locationInView:self.gameView];
-    if (sender.state == UIGestureRecognizerStateBegan) {
-        [self attachView:sender.view toPoint:gesturePoint];
-    } else if (sender.state == UIGestureRecognizerStateChanged) {
-        self.attachment.anchorPoint = gesturePoint;
-    } else if (sender.state == UIGestureRecognizerStateEnded) {
-        [self.animator removeBehavior:self.attachment];
-    }
-    
-}
-
 - (void) pan:(UIPanGestureRecognizer *)sender {
     NSLog(@"recognized pan gesture");
     if (self.isInPinchedState) {
-        NSLog(@"in pinched state");
-        self.isInPinchedState = NO;
-        CGPoint gesturePoint = [sender locationInView:self.gameView];
-        if (sender.state == UIGestureRecognizerStateBegan) {
-            [self attachView:sender.view toPoint:gesturePoint];
-        } else if (sender.state == UIGestureRecognizerStateChanged) {
-            self.attachment.anchorPoint = gesturePoint;
-        } else if (sender.state == UIGestureRecognizerStateEnded) {
-            [self.animator removeBehavior:self.attachment];
+        CGPoint gesturePoint = [sender locationInView:sender.view];
+        for (NSUInteger i = 0; i < [[self.gameView subviews] count]; i++) {
+           
+            UIView *view = [[self.gameView subviews] objectAtIndex:i];
+            if (sender.state == UIGestureRecognizerStateBegan) {
+                [self attachView:view toPoint:gesturePoint];
+            } else if (sender.state == UIGestureRecognizerStateChanged) {
+                UIAttachmentBehavior *a = [self.attachments objectAtIndex:i];
+                a.anchorPoint = gesturePoint;
+                a.length = (CGFloat) i; // stagger the cards so it looks like a stacked deck
+                 NSLog(@"i: %d", i);
+            } else if (sender.state == UIGestureRecognizerStateEnded) {
+                 UIAttachmentBehavior *a = [self.attachments objectAtIndex:i];
+                [self.animator removeBehavior:a];
+            }
         }
+        if (sender.state == UIGestureRecognizerStateEnded) {
+            [self.attachments removeAllObjects];
+        }
+        
     }
 }
 
 - (void)attachView:(UIView *)view toPoint:(CGPoint)anchorPoint
 {
-        self.attachment = [[UIAttachmentBehavior alloc] initWithItem:self.view attachedToAnchor:anchorPoint];
-        [self.animator addBehavior:self.attachment];
+    UIAttachmentBehavior *attachment = [[UIAttachmentBehavior alloc] initWithItem:view attachedToAnchor:anchorPoint];
+    [self.attachments addObject:attachment];
+    [self.animator addBehavior:attachment];
 }
 
 - (void)tapCard:(UITapGestureRecognizer *)sender {
     NSLog(@"game controller programmed tap gesture recognized");
-    [self animateTouchCardAction:sender.view];
-    NSUInteger index = [[self.gameView subviews] indexOfObject:sender.view];
-    //NSUInteger index = [self.cardViews indexOfObject:sender.view];
-    [self.game chooseCardAtIndex:index];
+    if (!self.isInPinchedState) {
+        [self animateTouchCardAction:sender.view];
+        NSUInteger index = [[self.gameView subviews] indexOfObject:sender.view];
+        [self.game chooseCardAtIndex:index];
+    } else {
+        self.isInPinchedState = NO;
+        [self updateGridWithAnimation:YES];
+    }
     [self updateUI];
 }
 
@@ -251,10 +259,21 @@ CGFloat distanceBetweenTwoPoints(CGPoint point1, CGPoint point2)
     
     
     [self resetUIElements];
-//    [self removeAllSubviewsFromView:self.gameView];
-//    [self placeAllCardsInGridWithAnimation:YES];
-    [self updateGridWithAnimation:YES];
-    [self updateUI];
+        [UIView transitionWithView:self.gameView
+                          duration:0.5
+                           options:UIViewAnimationOptionTransitionCurlDown
+                        animations:^{
+                            [self removeAllSubviewsFromView:self.gameView];
+                        }completion:^(BOOL finished) {
+                            if (finished) {
+                                [self updateGridWithAnimation:YES];
+                                [self updateUI];
+                            }
+                        }];
+    
+    
+    
+    
 }
 
 - (void) animateTouchCardAction:(UIView *)view {
@@ -278,6 +297,7 @@ CGFloat distanceBetweenTwoPoints(CGPoint point1, CGPoint point2)
 
 - (void)updateGridWithAnimation:(bool)isAnimated
 {
+    NSLog(isAnimated? @"update grid with animation" : @"update grid");
     self.grid = nil;
     [self removeAllSubviewsFromView:self.gameView];
     [self placeAllCardsInGridWithAnimation:isAnimated];
@@ -291,7 +311,6 @@ CGFloat distanceBetweenTwoPoints(CGPoint point1, CGPoint point2)
         Card *card = [self.game cardAtIndex:i];
         [self updateCardWithView:view usingCard:card];
     }
-
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
 }
 
