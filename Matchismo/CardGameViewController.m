@@ -79,7 +79,6 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"view did load");
     self.currentCardCount = self.startingCardCount;
   
     // initialize game without waiting for user input

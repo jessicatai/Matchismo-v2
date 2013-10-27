@@ -121,7 +121,6 @@ static const int MATCH_BONUS = 4;
                 if (matchScore) {
                     // will give user a net gain of 4 points to find the match
                     points = matchScore * [self getPointsForKey:@"matchBonus" withDefaultValue:MATCH_BONUS] + (self.numCardsInMatch * -1 * [self getPointsForKey:@"costToChoose" withDefaultValue:COST_TO_CHOOSE]);
-                    NSLog(@"match");
 
                 } else {
                     points = [self getPointsForKey:@"mismatchPenalty" withDefaultValue:MISMATCH_PENALTY];

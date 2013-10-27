@@ -70,7 +70,6 @@
 }
 
 - (void) animateTouchCardAction:(UIView *)view {
-    NSLog(@"pcvc animate");
     if ([view isKindOfClass:[PlayingCardView class]]) {
         PlayingCardView *pvc = (PlayingCardView *) view;
         [UIView transitionWithView:pvc

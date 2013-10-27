@@ -112,13 +112,11 @@
     
 }
 
-
-// add curve to point
-
+// TODO: Johan's suggestion - use addCurveToPoint
 #define SQUIGGLE_WIDTH 0.12
 #define SQUIGGLE_HEIGHT 0.3
 #define SQUIGGLE_CONST 0.8
-// Honor code notice: I googled for help with drawing a squiggle
+// Google helped with drawing a squiggle
 - (void) drawSquiggleWithOrigin:(CGPoint) pipOrigin {
     CGFloat dx = self.bounds.size.width * SQUIGGLE_WIDTH / 2;
     CGFloat dy = self.bounds.size.height * SQUIGGLE_HEIGHT / 2;
