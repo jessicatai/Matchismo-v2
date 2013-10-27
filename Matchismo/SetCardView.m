@@ -36,6 +36,13 @@
     [self setNeedsDisplay];
 }
 
+#pragma mark - Gestures
+
+- (void)tapCard:(UITapGestureRecognizer *)sender {
+    NSLog(@"programmed tap gesture recognized");
+    self.chosen= !self.chosen;
+}
+
 #pragma mark - Drawing
 
 // Only override drawRect: if you perform custom drawing.
@@ -105,6 +112,8 @@
     
 }
 
+
+// add curve to point
 
 #define SQUIGGLE_WIDTH 0.12
 #define SQUIGGLE_HEIGHT 0.3

@@ -473,14 +473,14 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="LCl-6h-Ko1" kind="relationship" relationship="viewControllers" id="nSE-kd-n8X"/>
-                        <segue destination="NIE-oc-PFb" kind="relationship" relationship="viewControllers" id="RUQ-V2-ujH"/>
+                        <segue destination="Ecx-Ae-NWX" kind="relationship" relationship="viewControllers" id="9lt-fI-ku4"/>
+                        <segue destination="uoK-av-CkV" kind="relationship" relationship="viewControllers" id="gir-Zi-pv3"/>
                         <segue destination="xEf-wJ-I5d" kind="relationship" relationship="viewControllers" id="QOa-lm-h9T"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EZk-lq-zwY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="550" y="105"/>
+            <point key="canvasLocation" x="384" y="280"/>
         </scene>
         <!--History View Controller - History-->
         <scene sceneID="raF-kO-7ak">
@@ -976,6 +976,12 @@
         <!--Playing Card View Controller - Matchismo-->
         <scene sceneID="iDL-xK-74b">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UQ3-vQ-4bv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="NGr-jb-5En">
+                    <connections>
+                        <action selector="touchCard:" destination="LCl-6h-Ko1" id="142-j0-exj"/>
+                    </connections>
+                </tapGestureRecognizer>
                 <viewController id="LCl-6h-Ko1" customClass="PlayingCardViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="g86-ba-YT3"/>
@@ -989,22 +995,25 @@
                                 <rect key="frame" x="20" y="28" width="280" height="357"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <gestureRecognizers/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cKN-1v-Dxr">
-                                    <size key="itemSize" width="40" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="357" id="F75-AR-bSY"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wpI-t3-9tP">
+                                    <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlayingCard" id="lqg-h1-12A" customClass="PlayingCardCollectionViewCell">
-                                        <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cOQ-Ik-Klp" customClass="PlayingCardView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                 </view>
@@ -1049,37 +1058,21 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="pNj-8z-ATD" secondAttribute="trailing" constant="20" symbolic="YES" id="Hx7-6T-JWK"/>
-                            <constraint firstItem="rji-Pu-7gy" firstAttribute="top" secondItem="pNj-8z-ATD" secondAttribute="bottom" constant="8" id="USa-AL-RGa"/>
                             <constraint firstItem="OCv-ed-PZF" firstAttribute="top" secondItem="uyg-gM-eFc" secondAttribute="bottom" constant="20" symbolic="YES" id="Ytw-vD-Pxe"/>
                             <constraint firstAttribute="trailing" secondItem="rji-Pu-7gy" secondAttribute="trailing" constant="20" symbolic="YES" id="Zkg-Iz-IOW"/>
                             <constraint firstItem="uyg-gM-eFc" firstAttribute="leading" secondItem="fQ3-Cr-hd8" secondAttribute="leading" constant="20" symbolic="YES" id="dL1-Ne-dIW"/>
-                            <constraint firstItem="pNj-8z-ATD" firstAttribute="top" secondItem="g86-ba-YT3" secondAttribute="bottom" constant="20" symbolic="YES" id="ggh-ye-Mgf"/>
                             <constraint firstItem="OCv-ed-PZF" firstAttribute="top" secondItem="rji-Pu-7gy" secondAttribute="bottom" constant="20" symbolic="YES" id="jF0-uV-B5z"/>
-                            <constraint firstItem="pNj-8z-ATD" firstAttribute="leading" secondItem="fQ3-Cr-hd8" secondAttribute="leading" constant="20" symbolic="YES" id="teJ-ba-C4U"/>
-                            <constraint firstItem="rji-Pu-7gy" firstAttribute="top" secondItem="pNj-8z-ATD" secondAttribute="bottom" constant="8" id="zrN-0H-OwN"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Matchismo" image="matchismo_icon" id="vxk-XB-ykY"/>
                     <navigationItem key="navigationItem" id="0K3-Yt-j4E"/>
                     <connections>
                         <outlet property="cardCollectionView" destination="pNj-8z-ATD" id="cUH-t9-WhL"/>
-                        <outlet property="flipCardGesture" destination="rU1-KT-lX2" id="Wli-8z-P1C"/>
+                        <outlet property="gameView" destination="fQ3-Cr-hd8" id="DkQ-CH-cgg"/>
                         <outlet property="restartButton" destination="rji-Pu-7gy" id="7Jc-CF-PQq"/>
                         <outlet property="scoreLabel" destination="uyg-gM-eFc" id="aSc-Tw-E0C"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UQ3-vQ-4bv" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="right" id="rU1-KT-lX2">
-                    <connections>
-                        <action selector="swipe:" destination="LCl-6h-Ko1" id="bqM-zy-xfj"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <tapGestureRecognizer id="NGr-jb-5En">
-                    <connections>
-                        <action selector="touchCard:" destination="LCl-6h-Ko1" id="142-j0-exj"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1875" y="-466"/>
         </scene>
@@ -1317,69 +1310,195 @@
             </objects>
             <point key="canvasLocation" x="1809" y="530"/>
         </scene>
+        <!--Playing Card View Controller - Matchismo-->
+        <scene sceneID="iNg-PK-ZmM">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KT1-rj-aOq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="uoK-av-CkV" customClass="PlayingCardViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SfU-DA-WQw"/>
+                        <viewControllerLayoutGuide type="bottom" id="1tP-mO-sAl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VuT-cE-QVR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLu-t0-afq">
+                                <rect key="frame" x="20" y="393" width="64" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v87-L9-Jjk">
+                                <rect key="frame" x="236" y="393" width="64" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Re-deal">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="touchAddCardsButton:" destination="NIE-oc-PFb" eventType="touchUpInside" id="XPR-bx-oGl"/>
+                                    <action selector="touchRestartButton:" destination="uoK-av-CkV" eventType="touchUpInside" id="03v-4V-F0s"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7uH-Vg-6Be">
+                                <rect key="frame" x="20" y="20" width="280" height="365"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="mRi-9H-7Yt" appends="YES" id="Ds8-Mo-Jo6"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="7uH-Vg-6Be" firstAttribute="top" secondItem="SfU-DA-WQw" secondAttribute="bottom" constant="20" symbolic="YES" id="2tc-0P-zOP"/>
+                            <constraint firstAttribute="trailing" secondItem="7uH-Vg-6Be" secondAttribute="trailing" constant="20" symbolic="YES" id="7F6-9m-Ane"/>
+                            <constraint firstItem="7uH-Vg-6Be" firstAttribute="leading" secondItem="VuT-cE-QVR" secondAttribute="leading" constant="20" symbolic="YES" id="Cgp-Qf-g7B"/>
+                            <constraint firstItem="v87-L9-Jjk" firstAttribute="top" secondItem="7uH-Vg-6Be" secondAttribute="bottom" constant="8" id="Q32-CU-j1u"/>
+                            <constraint firstItem="1tP-mO-sAl" firstAttribute="top" secondItem="v87-L9-Jjk" secondAttribute="bottom" constant="8" id="lQR-yK-nC3"/>
+                            <constraint firstItem="v87-L9-Jjk" firstAttribute="centerY" secondItem="eLu-t0-afq" secondAttribute="centerY" id="rtf-fL-EJM"/>
+                            <constraint firstAttribute="trailing" secondItem="v87-L9-Jjk" secondAttribute="trailing" constant="20" id="sS3-1C-3fR"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="lQo-q4-2YK" appends="YES" id="ck0-i2-mIO"/>
+                            <outletCollection property="gestureRecognizers" destination="noI-Bx-G7M" appends="YES" id="XmA-5H-LZL"/>
+                        </connections>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Matchismo" image="matchismo_icon" id="H1a-Vm-B1b"/>
+                    <navigationItem key="navigationItem" id="BEi-Z6-cRf"/>
+                    <connections>
+                        <outlet property="gameView" destination="7uH-Vg-6Be" id="UXB-TP-8ZE"/>
+                        <outlet property="restartButton" destination="v87-L9-Jjk" id="unG-pY-9Iy"/>
+                        <outlet property="scoreLabel" destination="eLu-t0-afq" id="0cu-6d-Scr"/>
+                    </connections>
+                </viewController>
+                <tapGestureRecognizer id="mRi-9H-7Yt">
+                    <connections>
+                        <action selector="touchCard:" destination="uoK-av-CkV" id="3vt-tj-auh"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <pinchGestureRecognizer id="lQo-q4-2YK">
+                    <connections>
+                        <action selector="pinchCards:" destination="uoK-av-CkV" id="uYX-A7-RVP"/>
+                    </connections>
+                </pinchGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="noI-Bx-G7M">
+                    <connections>
+                        <action selector="panPinchedCards:" destination="uoK-av-CkV" id="7Dy-qN-NUg"/>
+                    </connections>
+                </panGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1107" y="-674"/>
+        </scene>
+        <!--Set Card View Controller - Set-->
+        <scene sceneID="Lng-GP-Yf2">
+            <objects>
+                <viewController id="Ecx-Ae-NWX" customClass="SetCardViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dvg-jO-dDe"/>
+                        <viewControllerLayoutGuide type="bottom" id="HkJ-9p-HNv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BWH-OA-Erb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Score: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gD-Yn-IHW">
+                                <rect key="frame" x="20" y="399" width="280" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k9Y-Q3-wOk">
+                                <rect key="frame" x="158" y="393" width="54" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Re-deal">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="touchRestartButton:" destination="Ecx-Ae-NWX" eventType="touchUpInside" id="p2N-Tn-RMM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4df-OS-ILD">
+                                <rect key="frame" x="240" y="393" width="60" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="+3 cards">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="touchAddCardsButton:" destination="Ecx-Ae-NWX" eventType="touchUpInside" id="YxS-gR-AgR"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rsv-ta-52q">
+                                <rect key="frame" x="20" y="20" width="280" height="358"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="3gD-Yn-IHW" firstAttribute="centerY" secondItem="k9Y-Q3-wOk" secondAttribute="centerY" constant="6" id="0gf-yC-4ji"/>
+                            <constraint firstItem="rsv-ta-52q" firstAttribute="top" secondItem="dvg-jO-dDe" secondAttribute="bottom" constant="20" symbolic="YES" id="AoU-rW-81n"/>
+                            <constraint firstItem="HkJ-9p-HNv" firstAttribute="top" secondItem="3gD-Yn-IHW" secondAttribute="bottom" constant="20" symbolic="YES" id="GwW-tV-Fk5"/>
+                            <constraint firstItem="3gD-Yn-IHW" firstAttribute="leading" secondItem="BWH-OA-Erb" secondAttribute="leading" constant="20" symbolic="YES" id="SCZ-Zu-Q1W"/>
+                            <constraint firstItem="k9Y-Q3-wOk" firstAttribute="top" secondItem="rsv-ta-52q" secondAttribute="bottom" constant="15" id="WXL-g4-hjM"/>
+                            <constraint firstItem="3gD-Yn-IHW" firstAttribute="top" secondItem="rsv-ta-52q" secondAttribute="bottom" constant="27" id="b0c-cg-YY2"/>
+                            <constraint firstItem="rsv-ta-52q" firstAttribute="leading" secondItem="BWH-OA-Erb" secondAttribute="leading" constant="20" symbolic="YES" id="fbG-1I-bgi"/>
+                            <constraint firstItem="HkJ-9p-HNv" firstAttribute="top" secondItem="4df-OS-ILD" secondAttribute="bottom" constant="20" symbolic="YES" id="fiF-2P-rjh"/>
+                            <constraint firstItem="k9Y-Q3-wOk" firstAttribute="centerY" secondItem="4df-OS-ILD" secondAttribute="centerY" id="hvs-qi-e2i"/>
+                            <constraint firstAttribute="trailing" secondItem="rsv-ta-52q" secondAttribute="trailing" constant="20" symbolic="YES" id="ilc-Bz-h1D"/>
+                            <constraint firstItem="HkJ-9p-HNv" firstAttribute="top" secondItem="k9Y-Q3-wOk" secondAttribute="bottom" constant="20" symbolic="YES" id="kW7-60-B09"/>
+                            <constraint firstItem="4df-OS-ILD" firstAttribute="top" secondItem="rsv-ta-52q" secondAttribute="bottom" constant="15" id="o7i-dW-Jpw"/>
+                            <constraint firstAttribute="trailing" secondItem="4df-OS-ILD" secondAttribute="trailing" constant="20" symbolic="YES" id="we0-6K-9wb"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="BiR-92-GDF" appends="YES" id="wwY-3z-rnA"/>
+                        </connections>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Set" image="set_icon" id="05H-bV-3Hf"/>
+                    <navigationItem key="navigationItem" id="d89-1J-0Nt"/>
+                    <connections>
+                        <outlet property="addCardsButton" destination="4df-OS-ILD" id="MRJ-ab-Na9"/>
+                        <outlet property="gameView" destination="rsv-ta-52q" id="YG0-1O-Pyi"/>
+                        <outlet property="restartButton" destination="k9Y-Q3-wOk" id="NXU-up-5By"/>
+                        <outlet property="scoreLabel" destination="3gD-Yn-IHW" id="t8y-yq-6aQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lmP-X6-501" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="ID3-tt-KdN">
+                    <connections>
+                        <action selector="swipe:" destination="Ecx-Ae-NWX" id="mrg-tJ-dhz"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <tapGestureRecognizer id="ATE-w5-PEf">
+                    <connections>
+                        <action selector="touchCard:" destination="Ecx-Ae-NWX" id="zuD-63-zRD"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <pinchGestureRecognizer id="BiR-92-GDF">
+                    <connections>
+                        <action selector="pinchCards:" destination="Ecx-Ae-NWX" id="E2S-Ic-E0n"/>
+                    </connections>
+                </pinchGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1107" y="280"/>
+        </scene>
     </scenes>
     <resources>
         <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardback" width="80" height="120"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
-        <image name="cardfront" width="64" height="96"/>
         <image name="cardfront" width="64" height="96"/>
         <image name="gear_icon" width="30" height="30"/>
         <image name="matchismo_icon" width="30" height="30"/>

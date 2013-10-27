@@ -61,12 +61,21 @@
 
 // TODO: after deck is exhausted, click re-deal then both de-deal and +3 card buttons are disabled
 - (IBAction)touchAddCardsButton:(UIButton *)sender {
-    bool hasCardsLeft = [self.game addCards:self.game.numCardsInMatch];
-    NSLog(hasCardsLeft ? @"Cards left" : @"No cards left");
-    // when there aren't any cards left, disable the add cards button
-    [sender setEnabled:hasCardsLeft];
-    sender.alpha = hasCardsLeft ? 1.0 : 0.3;
-    [self.cardCollectionView reloadData];
+    NSUInteger cardsAdded = [self.game addCards:self.game.numCardsInMatch];
+    // disable the button when there aren't enough cards left
+    if (cardsAdded < self.game.numCardsInMatch) {
+        sender.enabled = NO;
+        sender.alpha = 0.3;
+    }
+    self.currentCardCount = [[self.gameView subviews] count] + cardsAdded;
+    
+    [UIView transitionWithView:self.view.superview
+                      duration:1.0
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        [self updateGridWithAnimation:NO];
+                        [self updateUI];
+                    }completion: NULL];
 }
 
 - (void) resetUIElements {
@@ -80,39 +89,34 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    [self.setCardView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.setCardView action:@selector(pinch:)]];
+
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
-                  cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SetCard" forIndexPath:indexPath];
-    
-    Card *card = [self.game cardAtIndex:indexPath.item];
-    [self updateCell:cell usingCard:card];
-    return cell;
+- (UIView *)createCardViewWithFrame:(CGRect)frame usingCard:(Card*) card{
+    return [[SetCardView alloc] initWithFrame:frame];
 }
 
-
--(void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card {
-    if ([cell isKindOfClass:[SetCardCollectionViewCell class]]) {
-        SetCardView *setCardView = ((SetCardCollectionViewCell *)cell).setCardView;
-        
-        if ([card isKindOfClass:[SetCard class]]) {
-            SetCard *setCard = (SetCard *)card;
-            setCardView.color = setCard.color;
-            setCardView.shape = setCard.shape;
-            setCardView.shading = setCard.shading;
-            setCardView.count = setCard.count;
-            setCardView.chosen = setCard.chosen;
-            if (setCard.isMatched) {
-                NSUInteger index = [self.cardCollectionView indexPathForCell:cell].item;
-                [self.game removeCardAtIndex:index];
-                [self.cardCollectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:index inSection:0]]];
-            }
+- (void) updateCardWithView:(UIView *)view usingCard:(Card*)card {
+    if ([view isKindOfClass:[SetCardView class]] && [card isKindOfClass:[SetCard class]]) {
+        SetCardView *setCardView = (SetCardView *)view;
+        SetCard *setCard = (SetCard *)card;
+        setCardView.color = setCard.color;
+        setCardView.shape = setCard.shape;
+        setCardView.shading = setCard.shading;
+        setCardView.count = setCard.count;
+        setCardView.chosen = setCard.chosen;
+        if (setCard.isMatched) {
+            [UIView transitionWithView:setCardView.superview
+                              duration:1.0
+                               options:UIViewAnimationOptionTransitionCrossDissolve
+                            animations:^{
+                                NSUInteger index = [[self.gameView subviews] indexOfObject:setCardView];
+                                [self.game removeCardAtIndex:index];
+                                [setCardView removeFromSuperview];
+                            }completion: NULL];
+            self.currentCardCount = [[self.gameView subviews] count];
         }
     }
 }
-
 
 @end

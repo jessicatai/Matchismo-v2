@@ -52,62 +52,42 @@
         self.playingCardView.suit = playingCard.suit;
     }
 }
-- (IBAction)swipe:(UISwipeGestureRecognizer *)sender {
-    NSLog(@"in swipe");
-    [UIView transitionWithView:self.playingCardView
-                      duration:0.5
-                       options:UIViewAnimationOptionTransitionFlipFromLeft
-                    animations:^{
-                        self.playingCardView.faceUp = !self.playingCardView.faceUp;
-                    }completion: NULL];
+
+- (UIView *)createCardViewWithFrame:(CGRect)frame usingCard:(Card*) card{
+    return[[PlayingCardView alloc] initWithFrame:frame];
 }
 
-// flip the playing card over upon tap gesture
-- (void) animateTouchCardAction:(UICollectionViewCell *)cell {
-    if ([cell isKindOfClass:[PlayingCardCollectionViewCell class]]){
-        PlayingCardCollectionViewCell *playingCardCell = (PlayingCardCollectionViewCell *) cell;
-    
-        [UIView transitionWithView:playingCardCell.playingCardView
+- (void) updateCardWithView:(UIView *)view usingCard:(Card*)card {
+    if ([view isKindOfClass:[PlayingCardView class]] && [card isKindOfClass:[PlayingCard class]]) {
+        PlayingCardView *playingCardView = (PlayingCardView *)view;
+        PlayingCard *playingCard = (PlayingCard *)card;
+        playingCardView.rank = playingCard.rank;
+        playingCardView.suit = playingCard.suit;
+        playingCardView.faceUp = playingCard.isChosen;
+        playingCardView.alpha = playingCard.isMatched ? 0.3 : 1.0;
+        // TODO: allow clicking on already matched cards?
+    }
+}
+
+- (void) animateTouchCardAction:(UIView *)view {
+    NSLog(@"pcvc animate");
+    if ([view isKindOfClass:[PlayingCardView class]]) {
+        PlayingCardView *pvc = (PlayingCardView *) view;
+        [UIView transitionWithView:pvc
                           duration:0.5
                            options:UIViewAnimationOptionTransitionFlipFromLeft
                         animations:^{
-                            playingCardCell.playingCardView.faceUp= !playingCardCell.playingCardView.faceUp;
+                            pvc.faceUp= !pvc.faceUp;
                         }completion: NULL];
-        }
+
     }
 
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    [self.playingCardView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.playingCardView action:@selector(pinch:)]];
 }
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
-                  cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PlayingCard" forIndexPath:indexPath];
-    
-    Card *card = [self.game cardAtIndex:indexPath.item];
-    [self updateCell:cell usingCard:card];
-    return cell;
-}
-
-
--(void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card {
-    if ([cell isKindOfClass:[PlayingCardCollectionViewCell class]]) {
-        PlayingCardView *playingCardView = ((PlayingCardCollectionViewCell *)cell).playingCardView;
-        
-        if ([card isKindOfClass:[PlayingCard class]]) {
-            PlayingCard *playingCard = (PlayingCard *)card;
-            playingCardView.rank = playingCard.rank;
-            playingCardView.suit = playingCard.suit;
-            playingCardView.faceUp = playingCard.isChosen;
-            playingCardView.alpha = playingCard.isMatched ? 0.3 : 1.0;
-        }
-    }
-}
-
 
 @end

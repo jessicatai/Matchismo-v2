@@ -67,18 +67,26 @@
     [self.cards removeObjectAtIndex:index];
 }
 
-- (bool) addCards:(NSUInteger) numCardsToAdd {
-    bool hasCardsLeft = YES;
+- (NSUInteger) addCards:(NSUInteger) numCardsToAdd {
+    NSUInteger cardsAdded = 0;
     for (int i = 0; i < numCardsToAdd; i++) {
         Card *card = [self.deck drawRandomCard];
         if (card) {
             [self.cards addObject:card];
+            cardsAdded++;
         } else {
-            hasCardsLeft = NO;
             break;
         }
     }
-    return hasCardsLeft;
+    return cardsAdded;
+}
+
+- (Card *) addCard {
+    Card *card = [self.deck drawRandomCard];
+    if (card) {
+        [self.cards addObject:card];
+    }
+    return card;
 }
 
 -(void) addEntryWithCard:(NSMutableArray *) cards withPoints:(int) points
@@ -113,6 +121,7 @@ static const int MATCH_BONUS = 4;
                 if (matchScore) {
                     // will give user a net gain of 4 points to find the match
                     points = matchScore * [self getPointsForKey:@"matchBonus" withDefaultValue:MATCH_BONUS] + (self.numCardsInMatch * -1 * [self getPointsForKey:@"costToChoose" withDefaultValue:COST_TO_CHOOSE]);
+                    NSLog(@"match");
 
                 } else {
                     points = [self getPointsForKey:@"mismatchPenalty" withDefaultValue:MISMATCH_PENALTY];
