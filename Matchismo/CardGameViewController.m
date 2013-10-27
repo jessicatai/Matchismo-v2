@@ -107,7 +107,6 @@
             CGPoint cardCenter = [self.grid centerOfCellAtRow:row inColumn:col];
             
             // get magnitude and directions for vector scaling
-            CGFloat magnitude = distanceBetweenTwoPoints(midPoint, cardCenter);
             CGFloat dx = cardCenter.x - midPoint.x;
             CGFloat dy = cardCenter.y - midPoint.y;
             
@@ -127,10 +126,7 @@
         }
         sender.scale = 1.0;
     } else if (sender.state == UIGestureRecognizerStateEnded) {
-        NSLog(@"ended.. ");
         self.pinchScale = 1.0;
-        
-        
     }
     
 }
@@ -143,7 +139,6 @@ CGFloat distanceBetweenTwoPoints(CGPoint point1, CGPoint point2)
 };
 
 - (void) pan:(UIPanGestureRecognizer *)sender {
-    NSLog(@"recognized pan gesture");
     if (self.isInPinchedState) {
         CGPoint gesturePoint = [sender locationInView:sender.view];
         for (NSUInteger i = 0; i < [[self.gameView subviews] count]; i++) {
@@ -155,7 +150,8 @@ CGFloat distanceBetweenTwoPoints(CGPoint point1, CGPoint point2)
                 UIAttachmentBehavior *a = [self.attachments objectAtIndex:i];
                 a.anchorPoint = gesturePoint;
                 a.length = (CGFloat) i; // stagger the cards so it looks like a stacked deck
-                 NSLog(@"i: %d", i);
+                a.damping = 0.0;
+                a.frequency = 0.0;
             } else if (sender.state == UIGestureRecognizerStateEnded) {
                  UIAttachmentBehavior *a = [self.attachments objectAtIndex:i];
                 [self.animator removeBehavior:a];
@@ -176,12 +172,11 @@ CGFloat distanceBetweenTwoPoints(CGPoint point1, CGPoint point2)
 }
 
 - (void)tapCard:(UITapGestureRecognizer *)sender {
-    NSLog(@"game controller programmed tap gesture recognized");
-    if (!self.isInPinchedState) {
+    if (!self.isInPinchedState) { // (de)select tapped chosen card if its not matched
         [self animateTouchCardAction:sender.view];
         NSUInteger index = [[self.gameView subviews] indexOfObject:sender.view];
         [self.game chooseCardAtIndex:index];
-    } else {
+    } else { // resume original positions when tapped from the pinched position
         self.isInPinchedState = NO;
         [self updateGridWithAnimation:YES];
     }
@@ -297,7 +292,7 @@ CGFloat distanceBetweenTwoPoints(CGPoint point1, CGPoint point2)
 
 - (void)updateGridWithAnimation:(bool)isAnimated
 {
-    NSLog(isAnimated? @"update grid with animation" : @"update grid");
+    // redraw the grid every time to account for the addition and removal of cards
     self.grid = nil;
     [self removeAllSubviewsFromView:self.gameView];
     [self placeAllCardsInGridWithAnimation:isAnimated];

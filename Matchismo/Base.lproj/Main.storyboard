@@ -1430,18 +1430,18 @@
                         <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="3gD-Yn-IHW" firstAttribute="centerY" secondItem="k9Y-Q3-wOk" secondAttribute="centerY" constant="6" id="0gf-yC-4ji"/>
                             <constraint firstItem="rsv-ta-52q" firstAttribute="top" secondItem="dvg-jO-dDe" secondAttribute="bottom" constant="20" symbolic="YES" id="AoU-rW-81n"/>
                             <constraint firstItem="HkJ-9p-HNv" firstAttribute="top" secondItem="3gD-Yn-IHW" secondAttribute="bottom" constant="20" symbolic="YES" id="GwW-tV-Fk5"/>
+                            <constraint firstItem="3gD-Yn-IHW" firstAttribute="top" secondItem="rsv-ta-52q" secondAttribute="bottom" constant="21" id="MpZ-CV-lrs"/>
                             <constraint firstItem="3gD-Yn-IHW" firstAttribute="leading" secondItem="BWH-OA-Erb" secondAttribute="leading" constant="20" symbolic="YES" id="SCZ-Zu-Q1W"/>
                             <constraint firstItem="k9Y-Q3-wOk" firstAttribute="top" secondItem="rsv-ta-52q" secondAttribute="bottom" constant="15" id="WXL-g4-hjM"/>
-                            <constraint firstItem="3gD-Yn-IHW" firstAttribute="top" secondItem="rsv-ta-52q" secondAttribute="bottom" constant="27" id="b0c-cg-YY2"/>
                             <constraint firstItem="rsv-ta-52q" firstAttribute="leading" secondItem="BWH-OA-Erb" secondAttribute="leading" constant="20" symbolic="YES" id="fbG-1I-bgi"/>
                             <constraint firstItem="HkJ-9p-HNv" firstAttribute="top" secondItem="4df-OS-ILD" secondAttribute="bottom" constant="20" symbolic="YES" id="fiF-2P-rjh"/>
                             <constraint firstItem="k9Y-Q3-wOk" firstAttribute="centerY" secondItem="4df-OS-ILD" secondAttribute="centerY" id="hvs-qi-e2i"/>
                             <constraint firstAttribute="trailing" secondItem="rsv-ta-52q" secondAttribute="trailing" constant="20" symbolic="YES" id="ilc-Bz-h1D"/>
                             <constraint firstItem="HkJ-9p-HNv" firstAttribute="top" secondItem="k9Y-Q3-wOk" secondAttribute="bottom" constant="20" symbolic="YES" id="kW7-60-B09"/>
                             <constraint firstItem="4df-OS-ILD" firstAttribute="top" secondItem="rsv-ta-52q" secondAttribute="bottom" constant="15" id="o7i-dW-Jpw"/>
+                            <constraint firstItem="4df-OS-ILD" firstAttribute="leading" secondItem="k9Y-Q3-wOk" secondAttribute="trailing" constant="28" id="rV5-V0-llY"/>
                             <constraint firstAttribute="trailing" secondItem="4df-OS-ILD" secondAttribute="trailing" constant="20" symbolic="YES" id="we0-6K-9wb"/>
                         </constraints>
                         <connections>
