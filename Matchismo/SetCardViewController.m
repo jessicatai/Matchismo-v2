@@ -19,23 +19,14 @@
 
 @implementation SetCardViewController
 
-@synthesize game = _game;
-
-- (CardMatchingGame *)game
-{
-    if (!_game)
-    {
-        _game = [[CardMatchingGame alloc] initWithCardCount:self.startingCardCount usingDeck:[self createDeck]];
-        _game.points = NSNotFound;
-        // set is always played with 3 cards
-        _game.numCardsInMatch = 3;
-    }
-    return _game;
-}
-
 - (NSUInteger) startingCardCount
 {
     return 12;
+}
+
+- (NSUInteger) numCardsInMatch
+{
+    return 3;
 }
 
 - (Deck *)createDeck
@@ -53,10 +44,6 @@
         self.setCardView.shading = setCard.shading;
         self.setCardView.count = setCard.count;
     }
-}
-- (IBAction)swipe:(UISwipeGestureRecognizer *)sender {
-    NSLog(@"set swipe gestured recognized");
-    [self drawRandomSetCard];
 }
 
 // TODO: after deck is exhausted, click re-deal then both de-deal and +3 card buttons are disabled
@@ -106,7 +93,6 @@
         setCardView.count = setCard.count;
         setCardView.chosen = setCard.chosen;
         if (setCard.isMatched) {
-            NSLog(@"is matched");
             [UIView transitionWithView:setCardView.superview
                               duration:0.5
                                options:UIViewAnimationOptionTransitionCrossDissolve

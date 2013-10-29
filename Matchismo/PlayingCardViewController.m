@@ -19,22 +19,14 @@
 
 @implementation PlayingCardViewController
 
-@synthesize game = _game;
-
-- (CardMatchingGame *)game
-{
-    if (!_game) {
-        _game = [[CardMatchingGame alloc] initWithCardCount:self.startingCardCount usingDeck:[self createDeck]];
-        _game.points = NSNotFound;
-        _game.numCardsInMatch = 2;
-    }
-    
-    return _game;
-}
-
 - (NSUInteger) startingCardCount
 {
     return 30;
+}
+
+- (NSUInteger) numCardsInMatch
+{
+    return 2;
 }
 
 

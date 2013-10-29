@@ -12,7 +12,7 @@
 #import "Grid.h"
 
 
-@interface CardGameViewController ()
+@interface CardGameViewController () <UIDynamicAnimatorDelegate>
 @property (nonatomic, strong) NSMutableAttributedString *attributedDescription;
 // UI
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
@@ -21,7 +21,8 @@
 
 @property (nonatomic) Grid *grid;
 @property (nonatomic) NSUInteger difficulty;
-@property (nonatomic) NSUInteger startingCardCount;
+@property (nonatomic) NSUInteger startingCardCount; //abstract
+@property (nonatomic) NSUInteger numCardsInMatch; //abstract
 
 @property (nonatomic) CGFloat pinchScale;
 
@@ -67,7 +68,13 @@
 // abstract method
 - (CardMatchingGame *)game
 {
-    return nil;
+    if (!_game)
+    {
+        _game = [[CardMatchingGame alloc] initWithCardCount:self.startingCardCount usingDeck:[self createDeck]];
+        _game.points = NSNotFound;
+        _game.numCardsInMatch = self.numCardsInMatch;
+    }
+    return _game;
 }
 
 // abstract method
@@ -80,6 +87,7 @@
 {
     [super viewDidLoad];
     self.currentCardCount = self.startingCardCount;
+    self.isInPinchedState = NO;
   
     // initialize game without waiting for user input
     [self updateGridWithAnimation:NO];
